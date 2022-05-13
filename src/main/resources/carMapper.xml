@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siit.zsw.dao.CarDao">
+    <delete id="deleteBatch">
+
+DELETE
+FROM
+	carmessage
+WHERE
+	vehId in
+<foreach  collection="vehId" item="Id" open="(" close=")" separator=",">#{Id}</foreach>
+
+
+
+    </delete>
+
+
+    <delete id="delete">
+
+DELETE
+FROM
+	carmessage
+WHERE
+	vehId = #{vehId}
+
+ </delete>
+
+    <select id="list" resultType="com.siit.zsw.pojo.CarMessage">
+ SELECT
+	*
+FROM
+	carmessage
+</select>
+
+
+	<!--int queryNumberById(String vehId);-->
+	<select id="queryNumberById" resultType="int">
+        select count(*) from carmessage where vehID = #{vehID}
+    </select>
+
+	<!--int queryNumberByPlateNumber(String plateNumber);-->
+	<select id="queryNumberByPlateNumber" resultType="int">
+        select count(*) from carmessage where plateNumber = #{plateNumber}
+    </select>
+
+	<!--int save(CarMessage carMessage);-->
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.siit.zsw.dao.CarDao">
+       INSERT INTO carmessage
+       <trim prefix="(" suffix=")" suffixOverrides=",">
+       <if test="vehID !=null">vehID,</if>
+       <if test="plateNumber!=null">plateNumber,</if>
+	   <if test="brand!=null">brand,</if>
+	   <if test="remarks!=null">remarks,</if>
+	   <if test="productdate!=null">producedate,</if>
+	   <if test="currentmileage!=null">currentmileage,</if>
+	   <if test="userid!=null">userid,</if>
+	   <if test="createid!=null">createid,</if>
+	   <if test="cartype!=null">cartype,</if>
+
+       </trim>
+
+-- VALUES
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="vehID !=null">#{vehID},</if>
+            <if test="plateNumber!=null">#{plateNumber},</if>
+            <if test="brand!=null">#{brand},</if>
+            <if test="remarks!=null">#{remarks},</if>
+            <if test="productdate!=null">#{productdate},</if>
+            <if test="currentmileage!=null">#{currentmileage},</if>
+            <if test="userid!=null">#{userid},</if>
+            <if test="createid!=null">#{createid},</if>
+            <if test="cartype!=null">#{cartype}</if>
+
+        </trim>
+
+    </insert>
+
+	<select id="getCarMessageMapByVehID" resultType="java.util.Map" parameterType="java.lang.String">
+        select carmessage.*,`user`.username from carmessage LEFT JOIN user on carmessage.userid=`user`.id where vehID=#{vehID}
+    </select>
+
+	<update id="updateCar" parameterType="com.siit.zsw.dao.CarDao">
+        update carmessage
+        <set> 
+         <if test="brand!=null">brand=#{brand},</if>
+       <if test="remarks!=null">remarks=#{remarks},</if> 
+       <if test="productdate">productdate=#{productdate}</if> 
+        <if test="currentmileage!=null">currentmileage=#{currentmileage},</if>
+        <if test="userid!=null">userid=#{userId},</if>
+        <if test="createid!=null">createid=#{createId},</if>
+        <if test="cartype!=null">cartype=#{carType}</if> cartype=#{carType}
+
+        </set>
+        where vehID=#{vehID}
+    </update>
+
+</mapper>
+
+<!--id,
+	vehID,
+	plateNumber,
+	brand,
+	remarks,
+	producedate,
+	currentmileage,
+	userid,
+	createid cartype-->

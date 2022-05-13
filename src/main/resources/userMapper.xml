@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siit.zsw.dao.UserDao">
+   <select id="list" resultType="com.siit.zsw.pojo.User">
+        SELECT* FROM energycar.`user`
+   </select>
+    <select id="login" resultType="com.siit.zsw.pojo.User">
+      SELECT * FROM `user` WHERE username=#{username} AND `password`=#{password}
+    </select>
+<insert id="addUser" parameterType="com.siit.zsw.pojo.User">
+INSERT INTO
+`user`(id,username,password,createtime,nickname,birthdate,sex,dltime,hpic,usertype)
+VALUES(#{id},#{username},#{password},#{createtime},#{nickname},#{birthdate},#{sex},#{dltime},#{hpic},#{usertype})
+</insert>
+<delete id="deleteById" parameterType="int">
+
+</delete>
+    <update id="updataById" parameterType="com.siit.zsw.pojo.User">
+
+    </update>
+    <select id="selectUserByUser" parameterType="String" resultType="com.siit.zsw.pojo.User">
+SELECT * FROM `user` WHERE username=#{username}
+    </select>
+    <update id="updateHpic">
+        UPDATE `user` SET hpic=#{path} WHERE id=#{id}
+    </update>
+    <resultMap id="userMap" type="com.siit.zsw.pojo.User">
+        <id column="id" property="id"/>
+        <result column="username"/>
+        <result column="password" property="password"/>
+    </resultMap>
+</mapper>
+                                    <!-- id=603ee33b-d655-4520-9713-ae4e4243655c,
+                                    username='2763244002@qq.com',
+                                    password='123', createtime='null',
+                                    nickname='tom', birthdata='2022-03-18',
+                                    sex='null', dltime=null, hpic='null',
+                                    usertype=0}-->
