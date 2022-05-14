@@ -140,11 +140,11 @@
 	}
 
 	function jumpcompanycenter(){
-		window.location.href="http://" + location.host + "<%=path %>/" +"companycenter";
+		window.location.href="http://" + location.host + "<%=path %>/" +"companycenter.do";
 	}
 
 	function jumpcarposition(){
-		window.location.href='http://' + location.host + '<%=path %>/' +'carposition';
+		window.location.href='http://' + location.host + '<%=path %>/' +'carposition.do';
 	}
 
 	</script >

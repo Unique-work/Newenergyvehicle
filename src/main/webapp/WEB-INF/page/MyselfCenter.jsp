@@ -111,7 +111,7 @@
 		margin-left: 68px;
 	}
 	.carimg {
-		background: url(resources/images/myself/car.png);
+		background:url('resources/images/myself/car.png');
 		width: 534px;
 		height: 439px;
 		margin-top: 138px;
@@ -462,7 +462,7 @@
 								<c:forEach items="${faultsolution}" var="fs" varStatus="fst">
 									<div style="color: #ffee62;margin-left: 50px;margin-top: 20px;">
 										<h3>${fs.remarks}</h3>
-										<span style="font-size: 20px">建议：${fs.faultSolution}</span>
+										<span style="font-size: 20px">建议：${fs.faultsolution}</span>
 									</div>
 								</c:forEach>
 							</div>
@@ -473,7 +473,6 @@
 		</div>
 	</div>
 	<%@ include file="Bottom.jsp"%>
-	<script src="resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 	<script src="res/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="resources/js/sweetalert.min.js"></script>
 </body>
