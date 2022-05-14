@@ -47,7 +47,7 @@
 								style="color: #F0F8FD; padding: 24px; margin-left: 20px">首页</a>
 						</div>
 						<div class="navbar-header">
-							<a class="navbar-brand"
+							<a class="navbar-brand"  onclick="jumpcarposition()" href="javascript:void(0);"
 								style="color: #F0F8FD; margin-left: 30px; padding: 24px;">车辆分布</a>
 						</div>
 						<div class="navbar-header">
@@ -86,7 +86,7 @@
 			</li>
 			<li><button class="btn btn-primary" onclick="jumpAccset()"
 					style="width: 80%; margin: 5px 19px;">基本信息</button></li>
-			<li><button class="btn btn-primary"
+			<li><button class="btn btn-primary"onclick="jumpmycar()"
 					style="width: 80%; margin: 5px 19px;">我的车辆</button></li>
 			<c:if test="${user.usertype == '1' }">
 				<li><button class="btn btn-primary"style="width: 80%; margin: 5px 19px;" onclick="jumpcompanycenter()">企业管理</button></li>
@@ -131,6 +131,21 @@
 	   window.location.href="http://" + location.host + "<%=path %>/" +"listAllCar.do";
 
    }
+	function jumpindex(){
+		window.location.href="http://" + location.host + "<%=path%>/" +"index";
+	}
+
+	function jumpmycar(){
+		window.location.href="http://" + location.host + "<%=path%>/"+ "myselfcenter";
+	}
+
+	function jumpcompanycenter(){
+		window.location.href="http://" + location.host + "<%=path %>/" +"companycenter";
+	}
+
+	function jumpcarposition(){
+		window.location.href='http://' + location.host + '<%=path %>/' +'carposition';
+	}
 
 	</script >
 	

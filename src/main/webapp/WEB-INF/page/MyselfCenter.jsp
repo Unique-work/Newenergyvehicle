@@ -186,7 +186,7 @@
 							style="background-color:#196BA2;color:#F0F8FD;border:0px solid;">路线轨迹</button>
 					</div>
 					<div class="bheight" style="background-color: #145885;">
-						<div id="carlist" style="height:500px;">
+						<div id="carlist2" style="height:500px;">
 							<img alt="line" src="resources/images/myself/line2.png"
 								style="margin-left: 50%;z-index: -1">
 							<c:if test="${not empty carmessage }">
@@ -473,7 +473,7 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="../car/Bottom.jsp"%>
+	<%@ include file="Bottom.jsp"%>
 	<script src="resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 	<script src="res/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="resources/js/sweetalert.min.js"></script>
