@@ -1,5 +1,8 @@
 package com.siit.zsw.pojo;
 
+import lombok.ToString;
+
+@ToString
 public class CarMessage {
     private Integer id;
     private  String vehID;
