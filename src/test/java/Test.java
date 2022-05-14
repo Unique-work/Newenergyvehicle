@@ -6,4 +6,8 @@ public class Test {
     public void test(){
         ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
     }
+    @org.junit.Test
+    public void test02(){
+
+    }
 }

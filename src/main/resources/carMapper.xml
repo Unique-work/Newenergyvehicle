@@ -82,8 +82,12 @@ FROM
 	<select id="getCarMessageMapByVehID" resultType="java.util.Map" parameterType="java.lang.String">
         select carmessage.*,`user`.username from carmessage LEFT JOIN user on carmessage.userid=`user`.id where vehID=#{vehID}
     </select>
+    <select id="getCarMessageByUser" resultType="com.siit.zsw.pojo.CarMessage">
 
-	<update id="updateCar" parameterType="com.siit.zsw.dao.CarDao">
+		select * from carmessage where userid = #{userid}
+    </select>
+
+    <update id="updateCar" parameterType="com.siit.zsw.dao.CarDao">
         update carmessage
         <set> 
          <if test="brand!=null">brand=#{brand},</if>

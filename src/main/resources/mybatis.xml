@@ -12,6 +12,7 @@
     <mappers>
         <mapper resource="userMapper.xml"/>
         <mapper resource="carMapper.xml"/>
+        <mapper resource=""
     </mappers>
 
 

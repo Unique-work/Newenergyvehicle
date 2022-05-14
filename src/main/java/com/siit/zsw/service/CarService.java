@@ -21,4 +21,5 @@ public interface CarService {
 //    PageInfo<Car> listBypage(int pageNum,int pageSize );
 int deleteBatch(String[] vehId);
     int delete(String vehId);
+    public CarMessage getCarMessageByUser(String userid);
 }

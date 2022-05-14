@@ -17,32 +17,45 @@
 
         <!-- 处理NUMERIC和DECIMAL类型的策略 -->
         <javaTypeResolver>
-            <property name="forceBigDecimals" value="false" />
+            <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
         <!-- 配置pojo生成的位置 -->
-        <javaModelGenerator targetPackage="com.siit.zsw.pojo"  targetProject="src/main/java">
-            <property name="enableSubPackages" value="true" />
-            <property name="trimStrings" value="true" />
+        <javaModelGenerator targetPackage="com.siit.zsw.pojo" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- 配置sql映射文件的生成位置 -->
         <sqlMapGenerator targetPackage="com.siit.mapper" targetProject="src/main/resources">
-            <property name="enableSubPackages" value="true" />
-            <property name="trimStrings" value="true" />
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
         </sqlMapGenerator>
 
         <!-- 配置dao接口的生成位置 -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.siit.zsw.dao"
                              targetProject="src/main/java">
-            <property name="enableSubPackages" value="true" />
-            <property name="trimStrings" value="true" />
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
         </javaClientGenerator>
 
-        <!-- 指定逆向依据的数据表 -->
-        <table tableName="uploadfile" domainObjectName="uploadfile"></table>
-        <table tableName="cardistribution" domainObjectName="cardistribution"/>
-        <table tableName="carfriend" domainObjectName="carfriend"></table>
-        <table tableName="faultinfo" domainObjectName="Faultinfo"
+        <!-- 指定数据表 -->
+
+
+        <table selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false"
+               enableUpdateByExample="false" enableCountByExample="false" mapperName="FaultInfoMapper"
+               domainObjectName="FaultInfo" tableName="faultinfo" schema=""/>
+
+        <table selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false"
+               enableUpdateByExample="false" enableCountByExample="false" mapperName="FaultMeanMapper"
+               domainObjectName="FaultMean" tableName="tbfaultmean" schema=""/>
+
+        <table selectByExampleQueryId="false" enableSelectByExample="false" enableDeleteByExample="false"
+               enableUpdateByExample="false" enableCountByExample="false" mapperName="FaultSolutionMapper"
+               domainObjectName="FaultSolution" tableName="tbfaultsolution" schema=""/>
+
+        <table schema="" tableName="tbvehlocation" domainObjectName="CarLocation" mapperName="CarLocationMapper"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>

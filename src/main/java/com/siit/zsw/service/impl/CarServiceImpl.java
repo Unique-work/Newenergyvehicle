@@ -60,6 +60,11 @@ public class CarServiceImpl implements CarService {
         return carDao.delete(vehId);
     }
 
+    @Override
+    public CarMessage getCarMessageByUser(String userid) {
+        return carDao.getCarMessageByUser(userid);
+    }
+
     public PageInfo<CarMessage> listBypage(int pageNum, int pageSize) {
         //pageNum要显示的第几页，pageSize每页显示几条
         PageHelper.startPage(pageNum, pageSize);

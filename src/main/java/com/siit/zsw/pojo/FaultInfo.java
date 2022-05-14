@@ -16,13 +16,7 @@ public class FaultInfo {
     private String modid;
 
     private String remarks;
-    private FaultMean faultMean;
-    private FaultSolution faultSolution;
 
-    private int fid;
-    private int count;
-    private String fmodID;
-    private String fremarks;
     public Integer getId() {
         return id;
     }
@@ -85,53 +79,5 @@ public class FaultInfo {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
-    }
-
-    public FaultMean getFaultMean() {
-        return faultMean;
-    }
-
-    public void setFaultMean(FaultMean faultMean) {
-        this.faultMean = faultMean;
-    }
-
-    public FaultSolution getFaultSolution() {
-        return faultSolution;
-    }
-
-    public void setFaultSolution(FaultSolution faultSolution) {
-        this.faultSolution = faultSolution;
-    }
-
-    public int getFid() {
-        return fid;
-    }
-
-    public void setFid(int fid) {
-        this.fid = fid;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public String getFmodID() {
-        return fmodID;
-    }
-
-    public void setFmodID(String fmodID) {
-        this.fmodID = fmodID;
-    }
-
-    public String getFremarks() {
-        return fremarks;
-    }
-
-    public void setFremarks(String fremarks) {
-        this.fremarks = fremarks;
     }
 }
