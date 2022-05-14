@@ -1,4 +1,9 @@
 package com.siit.zsw.service;
 
-public class CarLocationService {
+import com.siit.zsw.pojo.CarLocation;
+
+import java.util.List;
+
+public interface CarLocationService {
+    public List<CarLocation> getCarMessageByVehID(String vehID);
 }
