@@ -132,11 +132,11 @@
 
    }
 	function jumpindex(){
-		window.location.href="http://" + location.host + "<%=path%>/" +"index";
+		window.location.href="http://" + location.host + "<%=path%>/" +"index.do";
 	}
 
 	function jumpmycar(){
-		window.location.href="http://" + location.host + "<%=path%>/"+ "myselfcenter";
+		window.location.href="http://" + location.host + "<%=path%>/"+ "myselfcenter.do";
 	}
 
 	function jumpcompanycenter(){

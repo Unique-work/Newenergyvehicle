@@ -19,7 +19,7 @@ public class pageTo {
         return mv;
 //
     }
-    @RequestMapping("MyselfCenter.do")
+//    @RequestMapping("MyselfCenter.do")
     public String center_To(){
         return "MyselfCenter";
     }

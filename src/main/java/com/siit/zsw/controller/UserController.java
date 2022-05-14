@@ -1,27 +1,43 @@
 package com.siit.zsw.controller;
 
-import com.siit.zsw.pojo.User;
+import com.siit.zsw.pojo.*;
 import com.siit.zsw.service.UserService;
+import com.siit.zsw.service.impl.CarLocationServiceImpl;
+import com.siit.zsw.service.impl.CarServiceImpl;
+import com.siit.zsw.service.impl.FaultInfoServiceImpl;
+import com.siit.zsw.service.impl.FaultSoltionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class UserController {
 
     @Autowired
     UserService service;
+    @Autowired
+    private CarServiceImpl carMessageService;
+
+    @Autowired
+    private CarLocationServiceImpl carLocationService;
+
+    @Autowired
+    private FaultInfoServiceImpl faultInfoService;
+
+    @Autowired
+    private FaultSoltionServiceImpl faultSolutionService;
+
     //Post
     @RequestMapping("list.do")
     @ResponseBody
@@ -110,5 +126,96 @@ public class UserController {
  public void updata(){
      System.out.println("updata.do");
  }
+    @RequestMapping(value = "myselfcenter.do", method = RequestMethod.GET)
+    public ModelAndView myselfcenter(HttpServletRequest request,
+                                     HttpServletResponse response, ModelMap model) {
+        User user = (User) request.getSession().getAttribute("user");
+        String userid = "";
+        String vehID = "";
+
+        String fdj = "0"; //发动机
+        String dc = "0"; //电池
+        String sw = "0"; //水温
+        String zczd = "0"; //驻车制动
+        String jy = "0"; //机油
+        String dp = "0"; //底盘
+        String abs = "0"; //abs
+        String park = "0"; //停车
+        String light = "0"; //车灯
+        String wheel = "0"; //车轮
+
+        if (user != null) {
+            userid = user.getId();
+        }
+        CarMessage cm = carMessageService.getCarMessageByUser(userid);
+        if (cm != null) {
+            vehID = cm.getVehID();
+        }
+        List<CarLocation> cl = carLocationService.getCarMessageByVehID(vehID);
+        List<FaultInfo> fi = faultInfoService.getfaultinfoByVehID(vehID);
+        ArrayList<FaultSolution> fs = new ArrayList<>();
+        for (FaultInfo fl : fi) {
+            if (fl.getFaultstate().equals("发动机")) {
+                fdj = fl.getFaultid();
+            }
+
+            if (fl.getFaultstate().equals("电池")) {
+                dc = fl.getFaultid();
+            }
+
+            if (fl.getFaultstate().equals("水温")) {
+                sw = fl.getFaultid();
+            }
+
+            if (fl.getFaultstate().equals("驻车制动")) {
+                zczd = fl.getFaultid();
+            }
+
+            if (fl.getFaultstate().equals("机油")) {
+                jy = fl.getFaultid();
+            }
+
+            if (fl.getFaultstate().equals("底盘")) {
+                dp = fl.getFaultid();
+            }
+
+            if (fl.getFaultstate().equals("abs")) {
+                abs = fl.getFaultid();
+            }
+
+            if (fl.getFaultstate().equals("停车")) {
+                park = fl.getFaultid();
+            }
+
+            if (fl.getFaultstate().equals("车轮")) {
+                wheel = fl.getFaultid();
+            }
+
+            FaultSolution fsl = faultSolutionService.getSolutionByFaultID(fl.getFaultid());
+
+            fs.add(fsl);
+        }
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("MyselfCenter");
+        mv.addObject("carmessage", cm);
+        if (cl != null) {
+            mv.addObject("carlocation", cl);
+        }
+        if (fi != null) {
+            mv.addObject("fdj", fdj);
+            mv.addObject("dc", dc);
+            mv.addObject("sw", sw);
+            mv.addObject("zczd", zczd);
+            mv.addObject("jy", jy);
+            mv.addObject("abs", abs);
+            mv.addObject("dp", dp);
+            mv.addObject("park", park);
+            mv.addObject("light", light);
+            mv.addObject("wheel", wheel);
+        }
+        mv.addObject("faultsolution", fs);
+        return mv;
+    }
 
 }

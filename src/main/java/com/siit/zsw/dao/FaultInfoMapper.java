@@ -2,6 +2,8 @@ package com.siit.zsw.dao;
 
 import com.siit.zsw.pojo.FaultInfo;
 
+import java.util.List;
+
 public interface FaultInfoMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,5 @@ public interface FaultInfoMapper {
     int updateByPrimaryKeySelective(FaultInfo record);
 
     int updateByPrimaryKey(FaultInfo record);
+    public List<FaultInfo> getfaultinfoByVehID(String vehID);
 }

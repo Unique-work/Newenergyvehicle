@@ -1,5 +1,10 @@
 package com.siit.zsw.pojo;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class FaultInfo {
     private Integer id;
 
@@ -16,6 +21,13 @@ public class FaultInfo {
     private String modid;
 
     private String remarks;
+    private FaultMean faultMean;
+    private FaultSolution faultSolution;
+
+    private int fid;
+    private int count;
+    private String fmodID;
+    private String fremarks;
 
     public Integer getId() {
         return id;

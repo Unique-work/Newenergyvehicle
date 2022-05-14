@@ -2,6 +2,8 @@ package com.siit.zsw.dao;
 
 import com.siit.zsw.pojo.CarLocation;
 
+import java.util.List;
+
 public interface CarLocationMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,5 @@ public interface CarLocationMapper {
     int updateByPrimaryKeySelective(CarLocation record);
 
     int updateByPrimaryKey(CarLocation record);
+    public List<CarLocation> getCarMessageByVehID(String vehID);
 }

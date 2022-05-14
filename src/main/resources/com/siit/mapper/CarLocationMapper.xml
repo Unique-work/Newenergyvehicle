@@ -21,7 +21,12 @@
     from tbvehlocation
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="getCarMessageByVehID" resultType="com.siit.zsw.pojo.CarLocation">
+
+select * from tbvehlocation where vehID = #{vehID}
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbvehlocation
     where id = #{id,jdbcType=INTEGER}
   </delete>

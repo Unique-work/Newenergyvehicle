@@ -134,8 +134,7 @@ public class CarController {
         System.out.println(checkIdArray.length);
 
     }
-
-    @GetMapping("MyselfCenter.do")
+//    @GetMapping("MyselfCenter.do")
     public void MyselfCenter() {
         System.out.println("MyselfCenter");
 

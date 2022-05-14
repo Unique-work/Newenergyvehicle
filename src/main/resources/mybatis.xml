@@ -7,12 +7,17 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
-
+<typeAliases>
+    <package name="com.siit.zsw.pojo"/>
+</typeAliases>
 
     <mappers>
         <mapper resource="userMapper.xml"/>
         <mapper resource="carMapper.xml"/>
-        <mapper resource=""
+        <mapper resource="com/siit/mapper/CarLocationMapper.xml"/>
+        <mapper resource="com/siit/mapper/FaultInfoMapper.xml"/>
+        <mapper resource="com/siit/mapper/FaultSolutionMapper.xml"/>
+        <mapper resource="com/siit/mapper/Distribution.xml"/>
     </mappers>
 
 
