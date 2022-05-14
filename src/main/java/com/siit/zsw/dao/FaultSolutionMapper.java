@@ -15,6 +15,4 @@ public interface FaultSolutionMapper {
     int updateByPrimaryKeySelective(FaultSolution record);
 
     int updateByPrimaryKey(FaultSolution record);
-
-    FaultSolution getSolutionByFaultID(String faultID);
 }
