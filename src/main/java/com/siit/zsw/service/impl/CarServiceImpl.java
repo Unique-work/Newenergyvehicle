@@ -4,8 +4,6 @@ package com.siit.zsw.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.siit.zsw.dao.CarDao;
-
-
 import com.siit.zsw.pojo.CarMessage;
 import com.siit.zsw.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +61,11 @@ public class CarServiceImpl implements CarService {
     @Override
     public CarMessage getCarMessageByUser(String userid) {
         return carDao.getCarMessageByUser(userid);
+    }
+
+    @Override
+    public void deleteByUserid(String userId) {
+        carDao.deleteByUserid(userId);
     }
 
     public PageInfo<CarMessage> listBypage(int pageNum, int pageSize) {

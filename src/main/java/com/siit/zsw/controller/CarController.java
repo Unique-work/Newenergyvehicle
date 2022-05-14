@@ -1,6 +1,7 @@
 package com.siit.zsw.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 import com.siit.zsw.pojo.CarMessage;
 import com.siit.zsw.service.impl.CarServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,4 +140,30 @@ public class CarController {
         System.out.println("MyselfCenter");
 
     }
+
+
+    @RequestMapping("/deleteByUserid")
+    public void deleteByUserid(HttpServletRequest req,
+                               HttpServletResponse resp, String userId) throws IOException {
+        carService.deleteByUserid(userId);
+        //查看删除结果
+        CarMessage cm = carService.getCarMessageByUser(userId);
+        String result = "";
+        String jsonp = "";
+        if (cm == null) {
+            result = new Gson().toJson("true");
+        } else {
+            result = new Gson().toJson("false");
+        }
+        jsonp = req.getParameter("jsoncallback");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html");
+        if (jsonp != null) {
+            result = jsonp + "(" + result + ")";
+            resp.getWriter().write(result);
+        } else {
+            resp.getWriter().write(result);
+        }
+    }
+
 }

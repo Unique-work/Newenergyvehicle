@@ -126,7 +126,7 @@ public class UserController {
  public void updata(){
      System.out.println("updata.do");
  }
-    @RequestMapping(value = "myselfcenter.do", method = RequestMethod.GET)
+    @RequestMapping(value = "myselfcenter.do")
     public ModelAndView myselfcenter(HttpServletRequest request,
                                      HttpServletResponse response, ModelMap model) {
         User user = (User) request.getSession().getAttribute("user");
@@ -148,6 +148,7 @@ public class UserController {
             userid = user.getId();
         }
         CarMessage cm = carMessageService.getCarMessageByUser(userid);
+//        System.out.println(cm.toString());
         if (cm != null) {
             vehID = cm.getVehID();
         }
@@ -195,7 +196,7 @@ public class UserController {
 
             fs.add(fsl);
         }
-
+        System.out.println(fs.toString());
         ModelAndView mv = new ModelAndView();
         mv.setViewName("MyselfCenter");
         mv.addObject("carmessage", cm);

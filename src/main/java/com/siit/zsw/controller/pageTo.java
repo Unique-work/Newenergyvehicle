@@ -1,6 +1,7 @@
 package com.siit.zsw.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,8 +20,12 @@ public class pageTo {
         return mv;
 //
     }
-//    @RequestMapping("MyselfCenter.do")
+    @GetMapping("MyselfCenter.jsp")
     public String center_To(){
         return "MyselfCenter";
+    }
+    @GetMapping("Carposition.do")
+    public String Carposition_To(){
+        return "Carposition";
     }
 }

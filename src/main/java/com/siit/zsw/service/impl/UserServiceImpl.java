@@ -1,7 +1,7 @@
 package com.siit.zsw.service.impl;
 
-import com.siit.zsw.pojo.User;
 import com.siit.zsw.dao.UserDao;
+import com.siit.zsw.pojo.User;
 import com.siit.zsw.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

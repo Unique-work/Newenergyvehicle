@@ -3,6 +3,7 @@ package com.siit.zsw.dao;
 import com.siit.zsw.pojo.FaultInfo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FaultInfoMapper {
     int deleteByPrimaryKey(Integer id);
@@ -17,4 +18,5 @@ public interface FaultInfoMapper {
 
     int updateByPrimaryKey(FaultInfo record);
     public List<FaultInfo> getfaultinfoByVehID(String vehID);
+    public List<FaultInfo> getfaultcount(Map<String,Object> map);
 }

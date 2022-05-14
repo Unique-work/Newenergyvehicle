@@ -2,8 +2,9 @@ package com.siit.zsw.dao;
 
 import com.siit.zsw.pojo.cardistribution;
 import com.siit.zsw.pojo.cardistributionExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface cardistributionMapper {
     long countByExample(cardistributionExample example);

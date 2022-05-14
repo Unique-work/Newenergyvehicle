@@ -1,10 +1,8 @@
 package com.siit.zsw.pojo;
 
-import lombok.Getter;
 import lombok.Setter;
 
 @Setter
-@Getter
 public class FaultInfo {
     private Integer id;
 
@@ -91,5 +89,29 @@ public class FaultInfo {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
+    }
+
+    public FaultMean getFaultMean() {
+        return this.faultMean;
+    }
+
+    public FaultSolution getFaultSolution() {
+        return this.faultSolution;
+    }
+
+    public int getFid() {
+        return this.fid;
+    }
+
+    public int getCount() {
+        return this.count;
+    }
+
+    public String getFmodID() {
+        return this.fmodID;
+    }
+
+    public String getFremarks() {
+        return this.fremarks;
     }
 }

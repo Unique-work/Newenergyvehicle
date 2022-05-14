@@ -1,7 +1,6 @@
 package com.siit.zsw.pojo;
 
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
 
 public class Distribution {
     private Integer id;

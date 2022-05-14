@@ -22,4 +22,5 @@ public interface CarService {
 int deleteBatch(String[] vehId);
     int delete(String vehId);
     public CarMessage getCarMessageByUser(String userid);
+    public void deleteByUserid(String userId);
 }

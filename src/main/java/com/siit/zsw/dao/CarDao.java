@@ -20,4 +20,5 @@ public interface CarDao {
     void updateCar(CarMessage carmessage);
     int deleteBatch(@Param("vehId") String[] vehId);
     int delete(String vehId);
+    public void deleteByUserid(String userId);
 }
