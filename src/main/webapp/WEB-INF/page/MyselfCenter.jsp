@@ -228,7 +228,9 @@
                 </button>
                 </button>
                 <c:if test="${not empty carmessage }">
-                    <a class="btn btn-primary btn-sm" style="float: right;margin-top: -5px;">车辆信息</a>
+                    <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#searchmodal"
+                       style="float: right;margin-top: -5px;">车辆信息</a>
+
                 </c:if>
                 <c:if test="${empty carmessage }">
                     <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal"
@@ -249,7 +251,7 @@
                                 <img alt="run" src="resources/images/myself/run.png"
                                      style="margin-bottom: 10px;height: 140%; margin-top: 20px;">
                                 <div style="color: #20c8ff;font-size: 20px">${carmessage.vehID}</div>
-                                <button class="btn btn-danger">删除车辆</button>
+                                <button class="btn btn-danger" onclick="del('${user.id}')">删除车辆</button>
                             </div>
                         </div>
                         <div class="col-lg-9 carimg">
@@ -603,6 +605,114 @@
     </div>
 </div>
 
+//车辆详情
+<div id="searchmodal" class="modal mymodal" aria-hidden="true"
+     style="display: none;left:10%">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×</button>
+                <h4 class="modal-title">车辆信息</h4>
+            </div>
+            <div class="modal-body">
+                <form id="user-search-form" class="form-horizontal" method="post"
+                      action="/admin/user/create" novalidate="novalidate">
+                    <div class="row form-group">
+                        <div class="col-md-3 control-label">
+                            <label for="vehID1">车辆ID<span class="xb"></span></label>
+                        </div>
+                        <div class="col-md-7 controls">
+                            <input type="text" id="vehID1" name="vehID" class="form-control"
+                                   readonly="readonly" value="${carmessage. vehID }">
+                            <div class="help-block" style="display:none;"></div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-3 control-label">
+                            <label for="plateNumber1">车牌号<span class="xb"></span></label>
+                        </div>
+                        <div class="col-md-7 controls">
+                            <input type="text" id="plateNumber1" name="plateNumber"
+                                   class="form-control" readonly="readonly"
+                                   value="${carmessage.plateNumber}">
+                            <div class="help-block" style="display:none;"></div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-3 control-label">
+                            <label for="brand1">品牌<span class="xb"></span></label>
+                        </div>
+                        <div class="col-md-7 controls">
+                            <input type="text" id="brand1" name="brand" class="form-control"
+                                   readonly="readonly" value="${carmessage.brand}">
+                            <div class="help-block" style="display:none;"></div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-3 control-label">
+                            <label for="currentMileage1"> 当前里程数</label>
+                        </div>
+                        <div class="col-md-7 controls">
+                            <input type="text" id="currentMileage1" name="currentMileage"
+                                   class="form-control" readonly="readonly"
+                                   value="${carmessage.currentMileage}">
+                            <div class="help-block" style="display:none;"></div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <%--@declare id="producedate1"--%><label for="produceDate1" class="col-md-3 control-label">出厂日期</label>
+                        <div class="col-md-7 controls"
+                             style="margin-top: 5px;margin-left: 10px;">
+                            <fmt:setLocale value="zh" />
+                            <fmt:formatDate value="${carmessage.produceDate}" />
+                            <!-- <input type="text" class="form-control" id="produceDate"
+                                placeholder="请选择开始时间" readonly="true"  value=""/> -->
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-3 control-label">
+                            <label for="userId1">归属人</label>
+                        </div>
+                        <input id="username1" class="form-control"
+                               value="${user.username}" style="margin-left: 16px;"
+                               readonly="readonly"> <input id="userid1"
+                                                           value="${user.id}" type="hidden">
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-3 control-label">
+                            <label for="carType1">车辆类型</label>
+                        </div>
+                        <div class="col-md-7 controls">
+                            <input type="text" id="carType1" name="carType"
+                                   class="form-control" readonly="readonly"
+                                   value="${carmessage.carType}">
+                            <div class="help-block" style="display:none;"></div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-3 control-label">
+                            <label for="remarks1">说明</label>
+                        </div>
+                        <div class="col-md-7 controls">
+                            <input type="text" id="remarks1" name="remarks"
+                                   class="form-control" readonly="readonly"
+                                   value="${carmessage.remarks}">
+                            <div class="help-block" style="display:none;"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button " class=" btn btn-primary pull-right"
+                        data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <%@ include file="Bottom.jsp" %>
 <script src="res/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="resources/js/sweetalert.min.js"></script>
@@ -610,6 +720,31 @@
         src="<%=basePath%>/resources/Widget/My97DatePicker/WdatePicker.js"
         type="text/javascript"></script>
 <script src="res/bootstrapValidator/js/bootstrapValidator.min.js"></script>
+<script>
 
+    function del(id){
+        var id = id;
+        $.ajax({
+            type : "post",
+            url : '<%=path%>' + "deleteByUserid.do",
+            data : {
+                userId : id
+            },
+            dataType : "json",//数据类型为json
+           // jsonp:"jsoncallback",
+            success : function(data){
+                if(data=="true"){
+                    swal("", "删除成功！", "success");
+                    <%--setTimeout("location.href = 'http://" + location.host + "<%=path%>"--%>
+                    <%--    +"/user/myselfcenter'",500);--%>
+                }else{
+                    sweetAlert("", "删除失败！", "error");
+                }
+            }
+        });
+    }
+
+
+</script>
 </body>
 </html>
