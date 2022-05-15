@@ -59,7 +59,7 @@ public class IndexController {
         Map<String,Object> map = new HashMap<String,Object>();
         List<FaultInfo> fau = faultInfoService.getfaultcount(map);
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/WEB-INF/page/car/Carposition.jsp");
+        mv.setViewName("Carposition");
         mv.addObject("fau",fau);
         return mv;
     }

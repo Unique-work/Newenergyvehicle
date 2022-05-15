@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -13,8 +12,12 @@
     <title>新能源汽车智能监控分析系统</title>
     <link href="res/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	<link rel="stylesheet" href="resources/css/style.css" />
-	<link rel="stylesheet" href="resources/css/page.css" />	
-<style>
+	<link rel="stylesheet" href="resources/css/page.css" />
+    <script src="resources/js/echarts.min.js" type="text/javascript"></script>
+    <script src="resources/js/bmap.js" type="text/javascript"></script>
+    <script src="resources/js/baidu.js" type="text/javascript"></script>
+
+    <style>
 
 .indexBoxP{
   color:#fff;
@@ -207,6 +210,8 @@ width: 100%;height:750px
        <div class="clearfix"></div>
      </div>
         <div class="lBoxContent">
+
+            <div id="main" style="height:100%"></div>
 		</div>
    </div>
 
@@ -244,6 +249,226 @@ width: 100%;height:750px
 	<script src="resources/js/jquery-3.3.1.min.js" type="text/javascript"></script>
 	<script src="res/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
+<script>
+    var myChart = echarts.init(document.getElementById('main'));
+    function pie(value,name) {
+        this.value=value;
+        this.name=name;
+    }
+    $.ajax({
+        type : "post",
+        url : '<%=path %>' + "/energy/getfaultlocation",
+        data : { },
+        dataType : "jsonp", //数据类型为json
+        jsonp:"jsoncallback",
+        success : function(obj){
+            var datas = [];
+            var dataa = [];
+            for(var i=0;i<obj.faultlocation.length;i++){
+                var val = [obj.faultlocation[i].latitudes,obj.faultlocation[i].longitudes,1];
+                myPie=new pie(val,obj.faultlocation[i].plateNumber);
+                datas.push(myPie);
+            }
+            for(var i=0;i<obj.normallocation.length;i++){
+                var val = [obj.normallocation[i].latitudes,obj.normallocation[i].longitudes,1];
+                myPie=new pie(val,obj.normallocation[i].plateNumber);
+                dataa.push(myPie);
+            }
+            datas=eval(datas);
+            //地图参数配置
+            option = {
+                backgroundColor: '#404a59',
+                tooltip : { trigger: 'item'},
+                bmap: {
+                    center: [118.78,32.04],
+                    zoom: 8,
+                    roam: true,
+                    mapStyle: {
+                        styleJson: [
+                            {
+                                "featureType": "water",
+                                "elementType": "all",
+                                "stylers": {
+                                    "color": "#044161"
+                                }
+                            },
+                            {
+                                "featureType": "land",
+                                "elementType": "all",
+                                "stylers": {
+                                    "color": "#004981"
+                                }
+                            },
+                            {
+                                "featureType": "boundary",
+                                "elementType": "geometry",
+                                "stylers": {
+                                    "color": "#064f85"
+                                }
+                            },
+                            {
+                                "featureType": "railway",
+                                "elementType": "all",
+                                "stylers": {
+                                    "visibility": "off"
+                                }
+                            },
+                            {
+                                "featureType": "highway",
+                                "elementType": "geometry",
+                                "stylers": {
+                                    "color": "#004981"
+                                }
+                            },
+                            {
+                                "featureType": "highway",
+                                "elementType": "geometry.fill",
+                                "stylers": {
+                                    "color": "#005b96",
+                                    "lightness": 1
+                                }
+                            },
+                            {
+                                "featureType": "highway",
+                                "elementType": "labels",
+                                "stylers": {
+                                    "visibility": "off"
+                                }
+                            },
+                            {
+                                "featureType": "arterial",
+                                "elementType": "geometry",
+                                "stylers": {
+                                    "color": "#004981"
+                                }
+                            },
+                            {
+                                "featureType": "arterial",
+                                "elementType": "geometry.fill",
+                                "stylers": {
+                                    "color": "#00508b"
+                                }
+                            },
+                            {
+                                "featureType": "poi",
+                                "elementType": "all",
+                                "stylers": {
+                                    "visibility": "off"
+                                }
+                            },
+                            {
+                                "featureType": "green",
+                                "elementType": "all",
+                                "stylers": {
+                                    "color": "#056197",
+                                    "visibility": "off"
+                                }
+                            },
+                            {
+                                "featureType": "subway",
+                                "elementType": "all",
+                                "stylers": {
+                                    "visibility": "off"
+                                }
+                            },
+                            {
+                                "featureType": "manmade",
+                                "elementType": "all",
+                                "stylers": {
+                                    "visibility": "off"
+                                }
+                            },
+                            {
+                                "featureType": "local",
+                                "elementType": "all",
+                                "stylers": {
+                                    "visibility": "off"
+                                }
+                            },
+                            {
+                                "featureType": "arterial",
+                                "elementType": "labels",
+                                "stylers": {
+                                    "visibility": "off"
+                                }
+                            },
+                            {
+                                "featureType": "boundary",
+                                "elementType": "geometry.fill",
+                                "stylers": {
+                                    "color": "#029fd4"
+                                }
+                            },
+                            {
+                                "featureType": "building",
+                                "elementType": "all",
+                                "stylers": {
+                                    "color": "#1a5787"
+                                }
+                            },
+                            {
+                                "featureType": "label",
+                                "elementType": "all",
+                                "stylers": {
+                                    "visibility": "off"
+                                }
+                            }
+                        ]
+                    }
+                },
+                series : [
+                    {
+                        name: '汽车位置',
+                        type: 'scatter',
+                        coordinateSystem: 'bmap',
+                        data: datas,
+                        symbolSize:5,
+                        label: {
+                            normal: {
+                                formatter: '{b}',
+                                position: 'right',
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#FF2222'
+                            }
+                        }
+                    },
+                    {
+                        name: '汽车位置',
+                        type: 'scatter',
+                        coordinateSystem: 'bmap',
+                        data: dataa,
+                        symbolSize:5,
+                        label: {
+                            normal: {
+                                formatter: '{b}',
+                                position: 'right',
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#00DD2C'
+                            }
+                        }
+                    },
+                ]
+            };
+            myChart.setOption(option);  // 为ECharts实例图表指定配置项
+        }
+    });
 
+
+
+</script>
 </body>
 </html>

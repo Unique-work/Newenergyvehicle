@@ -144,7 +144,7 @@
 	}
 
 	function jumpcarposition(){
-		window.location.href='http://' + location.host + '<%=path %>/' +'carposition.do';
+		window.location.href='http://' + location.host + '<%=path %>/' +'Carposition.do';
 	}
 
 	</script >
