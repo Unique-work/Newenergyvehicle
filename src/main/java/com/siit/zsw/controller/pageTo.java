@@ -24,7 +24,7 @@ public class pageTo {
     public String center_To(){
         return "MyselfCenter";
     }
-    @GetMapping("Carposition.do")
+//    @GetMapping("Carposition.do")
     public String Carposition_To(){
         return "Carposition";
     }
