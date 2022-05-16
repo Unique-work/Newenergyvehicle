@@ -217,7 +217,7 @@ width: 100%;height:750px
         <div class="pull-left">
             <div class="form-group selectpo">
                 <%--@declare id="name"--%><label for="name" style=" color: #59b2fb;font-weight: 500;">地区</label>
-                <select class="form-control" style="width:100px;font-size:10px;" id="prov" >
+                <select class="form-control" style="width:100px;font-size:10px;" id="prov" onchange="drawchart()" >
                     <c:forEach items="${dis}" var="var" varStatus="cs">
                         <option value="${var.province}">${var.province}</option>
                     </c:forEach>
@@ -230,7 +230,7 @@ width: 100%;height:750px
         <div class="pull-left">
             <div class="form-group selectpo">
                 <label for="name" style=" color: #59b2fb;font-weight: 500;">车况</label>
-                <select class="form-control"  id="carstatus">
+                <select class="form-control"  id="carstatus" onchange="drawchart()">
                     <c:forEach items="${fal}" var="var" varStatus="cs">
                         <option value="${var.id}">${var.faultname}</option>
                     </c:forEach>
@@ -238,6 +238,9 @@ width: 100%;height:750px
 
                 </select>
             </div>
+
+
+
         </div>
 
         <div class="pull-right">
@@ -505,7 +508,270 @@ width: 100%;height:750px
         }
     });
 
+    var geoCoordMap = {
+        '北京市': [116.46,39.92],
+        '天津市': [117.2,39.13],
+        '上海市': [121.48,31.22],
+        '重庆市': [106.54,29.59],
+        '河北省': [114.48,38.03],
+        '山西省': [112.53,37.87],
+        '辽宁省': [123.38,41.8],
+        '吉林省': [125.35,43.88],
+        '黑龙江省': [126.63,45.75],
+        '江苏省': [118.78,32.04],
+        '浙江省': [120.19,30.26],
+        '安徽省': [117.27,31.86],
+        '福建省': [119.3,26.08],
+        '江西省': [115.89,28.68],
+        '山东省': [117,36.63],
+        '河南省': [113.65,34.76],
+        '湖北省': [114.31,30.52],
+        '湖南省': [113,28.21],
+        '广东省': [113.23,23.16],
+        '海南省': [110.35,20.02],
+        '四川省': [104.06,30.67],
+        '贵州省': [106.71,26.57],
+        '云南省': [102.73,25.04],
+        '陕西省': [108.95,34.27],
+        '甘肃省': [103.73,36.03],
+        '青海省': [101.74,36.56],
+        '台湾省': [121.5,25.03],
+        '内蒙古自治区': [111.65,40.82],
+        '广西壮族自治区': [108.33,22.84],
+        '西藏自治区': [91.11,29.97],
+        '宁夏回族自治区': [106.27,38.47],
+        '新疆维吾尔族自治区': [87.68,43.77],
+        '香港特别行政区': [114.08,22.2],
+        '澳门特别行政区': [113.33,22.13]
+    };
 
+    function drawchart() {
+        var province = $("#prov").val();
+        var position = "["+geoCoordMap[province]+"]";
+        position=eval(position);
+        var carstatus=$("#carstatus").val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+        $.ajax({
+            type : "post",
+            url : '<%=path %>' + "/getfaultlocation.do",
+            data : {
+                province:province,
+                carstatus:carstatus,
+                startTime:startTime,
+                endTime:endTime
+            },
+            dataType : "jsonp",//数据类型为json
+            jsonp:"jsoncallback",
+
+            success : function(obj){
+                var datas = [];
+                var dataa = [];
+                if(obj.faultlocation!=null){
+                    for(var i=0;i<obj.faultlocation.length;i++){
+                        var val = [obj.faultlocation[i].latitudes,obj.faultlocation[i].longitudes,1];
+                        myPie=new pie(val,obj.faultlocation[i].plateNumber);
+                        datas.push(myPie);
+                    }
+                }
+                if(obj.normallocation!=null){
+                    for(var i=0;i<obj.normallocation.length;i++){
+                        var val = [obj.normallocation[i].latitudes,obj.normallocation[i].longitudes,1];
+                        myPie=new pie(val,obj.normallocation[i].plateNumber);
+                        dataa.push(myPie);
+                    }
+                }
+                option= {
+                    backgroundColor: '#404a59',
+                    tooltip : { trigger: 'item'},
+                    bmap: {
+                        center: [118.78,32.04],
+                        zoom: 8,
+                        roam: true,
+                        mapStyle: {
+                            styleJson: [
+                                {
+                                    "featureType": "water",
+                                    "elementType": "all",
+                                    "stylers": {
+                                        "color": "#044161"
+                                    }
+                                },
+                                {
+                                    "featureType": "land",
+                                    "elementType": "all",
+                                    "stylers": {
+                                        "color": "#004981"
+                                    }
+                                },
+                                {
+                                    "featureType": "boundary",
+                                    "elementType": "geometry",
+                                    "stylers": {
+                                        "color": "#064f85"
+                                    }
+                                },
+                                {
+                                    "featureType": "railway",
+                                    "elementType": "all",
+                                    "stylers": {
+                                        "visibility": "off"
+                                    }
+                                },
+                                {
+                                    "featureType": "highway",
+                                    "elementType": "geometry",
+                                    "stylers": {
+                                        "color": "#004981"
+                                    }
+                                },
+                                {
+                                    "featureType": "highway",
+                                    "elementType": "geometry.fill",
+                                    "stylers": {
+                                        "color": "#005b96",
+                                        "lightness": 1
+                                    }
+                                },
+                                {
+                                    "featureType": "highway",
+                                    "elementType": "labels",
+                                    "stylers": {
+                                        "visibility": "off"
+                                    }
+                                },
+                                {
+                                    "featureType": "arterial",
+                                    "elementType": "geometry",
+                                    "stylers": {
+                                        "color": "#004981"
+                                    }
+                                },
+                                {
+                                    "featureType": "arterial",
+                                    "elementType": "geometry.fill",
+                                    "stylers": {
+                                        "color": "#00508b"
+                                    }
+                                },
+                                {
+                                    "featureType": "poi",
+                                    "elementType": "all",
+                                    "stylers": {
+                                        "visibility": "off"
+                                    }
+                                },
+                                {
+                                    "featureType": "green",
+                                    "elementType": "all",
+                                    "stylers": {
+                                        "color": "#056197",
+                                        "visibility": "off"
+                                    }
+                                },
+                                {
+                                    "featureType": "subway",
+                                    "elementType": "all",
+                                    "stylers": {
+                                        "visibility": "off"
+                                    }
+                                },
+                                {
+                                    "featureType": "manmade",
+                                    "elementType": "all",
+                                    "stylers": {
+                                        "visibility": "off"
+                                    }
+                                },
+                                {
+                                    "featureType": "local",
+                                    "elementType": "all",
+                                    "stylers": {
+                                        "visibility": "off"
+                                    }
+                                },
+                                {
+                                    "featureType": "arterial",
+                                    "elementType": "labels",
+                                    "stylers": {
+                                        "visibility": "off"
+                                    }
+                                },
+                                {
+                                    "featureType": "boundary",
+                                    "elementType": "geometry.fill",
+                                    "stylers": {
+                                        "color": "#029fd4"
+                                    }
+                                },
+                                {
+                                    "featureType": "building",
+                                    "elementType": "all",
+                                    "stylers": {
+                                        "color": "#1a5787"
+                                    }
+                                },
+                                {
+                                    "featureType": "label",
+                                    "elementType": "all",
+                                    "stylers": {
+                                        "visibility": "off"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    series : [
+                        {
+                            name: '汽车位置',
+                            type: 'scatter',
+                            coordinateSystem: 'bmap',
+                            data: datas,
+                            symbolSize:5,
+                            label: {
+                                normal: {
+                                    formatter: '{b}',
+                                    position: 'right',
+                                    show: false
+                                },
+                                emphasis: {
+                                    show: true
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#FF2222'
+                                }
+                            }
+                        },
+                        {
+                            name: '汽车位置',
+                            type: 'scatter',
+                            coordinateSystem: 'bmap',
+                            data: dataa,
+                            symbolSize:5,
+                            label: {
+                                normal: {
+                                    formatter: '{b}',
+                                    position: 'right',
+                                    show: false
+                                },
+                                emphasis: {
+                                    show: true
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#00DD2C'
+                                }
+                            }
+                        },
+                    ]
+                };
+                myChart.setOption(option);
+            }
+        });
+    }
 
 </script>
 </body>

@@ -86,6 +86,17 @@ FROM
 
 		select * from carmessage where userid = #{userid}
     </select>
+    <select id="searchCarMessage" resultType="com.siit.zsw.pojo.CarMessage">
+
+
+
+
+    </select>
+    <select id="getCarMessageByVehID" resultType="com.siit.zsw.pojo.CarMessage">
+
+
+
+    </select>
 
     <update id="updateCar" parameterType="com.siit.zsw.dao.CarDao">
         update carmessage

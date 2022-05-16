@@ -21,4 +21,9 @@ public interface CarDao {
     int deleteBatch(@Param("vehId") String[] vehId);
     int delete(String vehId);
     public void deleteByUserid(String userId);
+    // 按条件查询车辆信息
+    public List<CarMessage> searchCarMessage(Map<String, Object> map);
+
+    //根据vehID获取车辆
+    public CarMessage getCarMessageByVehID(String vehID);
 }

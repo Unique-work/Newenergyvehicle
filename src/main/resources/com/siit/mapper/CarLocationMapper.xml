@@ -149,7 +149,20 @@ select * from
 	(select * from (select * from tbvehlocation l order by l.recordtime desc) j group by j.vehID ) l,
 	(select m.*,a.faultname,a.id as aid from carmessage m,faultinfo f,fault a where m.vehID = f.vehID and a.faulttype = f.faultLevel group by m.vehID) k
 	where l.vehID = k.vehID
-</select>
+    <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+      and l.recordtime between #{startTime,jdbcType=TIMESTAMP} and #{endTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="province != null and province != ''">
+      and  l.province = #{province}
+    </if>
+    <if test="carstatus != null and carstatus != ''">
+      and  k.aid = #{carstatus}
+    </if>
+    <if test="modid != null and modid != ''">
+      and  l.modID = #{modid}
+    </if>
+
+  </select>
 
   <select id="getNormalCarLocation" parameterType="java.util.Map" resultType="com.siit.zsw.pojo.CarLocation">
 		select * from
@@ -157,6 +170,16 @@ select * from
 		group by j.vehID ) l
 		where l.vehID not in
 		(select carmessage.vehID from carmessage,faultinfo where carmessage.vehID = faultinfo.vehID group by carmessage.vehID)
+    <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+      and l.recordtime between #{startTime,jdbcType=TIMESTAMP} and #{endTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="province != null and province != ''">
+      and  l.province = #{province}
+    </if>
+    <if test="modid != null and modid != ''">
+      and  l.modID = #{modid}
+    </if>
+
 </select>
 
 </mapper>
