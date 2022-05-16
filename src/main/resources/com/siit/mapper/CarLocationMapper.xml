@@ -143,4 +143,20 @@ select * from tbvehlocation where vehID = #{vehID}
       province = #{province,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getFaultCarLocation" parameterType="java.util.Map" resultType="com.siit.zsw.pojo.CarLocation">
+select * from
+	(select * from (select * from tbvehlocation l order by l.recordtime desc) j group by j.vehID ) l,
+	(select m.*,a.faultname,a.id as aid from carmessage m,faultinfo f,fault a where m.vehID = f.vehID and a.faulttype = f.faultLevel group by m.vehID) k
+	where l.vehID = k.vehID
+</select>
+
+  <select id="getNormalCarLocation" parameterType="java.util.Map" resultType="com.siit.zsw.pojo.CarLocation">
+		select * from
+		(select * from (select l.*,g.plateNumber from tbvehlocation l, carmessage g where g.vehID=l.vehID order by l.recordtime desc) j
+		group by j.vehID ) l
+		where l.vehID not in
+		(select carmessage.vehID from carmessage,faultinfo where carmessage.vehID = faultinfo.vehID group by carmessage.vehID)
+</select>
+
 </mapper>

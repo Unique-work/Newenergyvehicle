@@ -15,7 +15,11 @@
 	<link rel="stylesheet" href="resources/css/page.css" />
     <script src="resources/js/echarts.min.js" type="text/javascript"></script>
     <script src="resources/js/bmap.js" type="text/javascript"></script>
+    <script src="<%=basePath%>resources/Widget/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
     <script src="resources/js/baidu.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=0PuRzyfk15DcXBfus7dTBV2OjHWdXm22">
+<%--    </script>  <script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=您的密钥">--%>
+</script>
 
     <style>
 
@@ -246,9 +250,9 @@ width: 100%;height:750px
   </div>  
 </div>
 	<%@ include file="Bottom.jsp"%>
-	<script src="resources/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+<%--	<script src="resources/js/jquery-3.3.1.min.js" type="text/javascript"></script>--%>
 	<script src="res/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-
+<script src="resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script>
     var myChart = echarts.init(document.getElementById('main'));
     function pie(value,name) {
@@ -257,7 +261,7 @@ width: 100%;height:750px
     }
     $.ajax({
         type : "post",
-        url : '<%=path %>' + "/energy/getfaultlocation",
+        url : '<%=path %>' + "getfaultlocation.do",
         data : { },
         dataType : "jsonp", //数据类型为json
         jsonp:"jsoncallback",

@@ -151,4 +151,6 @@
 	
 	
 </body>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=cfUZdCuwHzDdRPEwHXtQ38uPKbxZGq8L">
+</script>
 </html>
