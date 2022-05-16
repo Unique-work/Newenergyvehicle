@@ -2,8 +2,11 @@ package com.siit.zsw.controller;
 
 import com.google.gson.Gson;
 import com.siit.zsw.pojo.CarLocation;
+import com.siit.zsw.pojo.Distribution;
+import com.siit.zsw.pojo.Fault;
 import com.siit.zsw.pojo.FaultInfo;
 import com.siit.zsw.service.CarLocationService;
+import com.siit.zsw.service.ChartService;
 import com.siit.zsw.service.FaultInfoService;
 import com.siit.zsw.service.impl.CarLocationServiceImpl;
 import com.siit.zsw.service.impl.FaultSoltionServiceImpl;
@@ -36,7 +39,8 @@ public class IndexController {
     @Autowired
     private FaultSoltionServiceImpl faultSolutionService;
 
-
+    @Autowired
+    private ChartService chartService;
     @RequestMapping("index.do")
     public String indexto(){
         System.out.println("index");
@@ -63,10 +67,16 @@ public class IndexController {
                                     HttpServletResponse response, ModelMap model) {
         Map<String,Object> map = new HashMap<String,Object>();
         List<FaultInfo> fau = faultInfoService.getfaultcount(map);
+        List<Distribution> dis = chartService.getDistribution();
+        List<Fault> fal = chartService.getFault();
+
         ModelAndView mv = new ModelAndView();
         System.out.println("Carposition.do");
         mv.setViewName("Carposition");
         mv.addObject("fau",fau);
+        mv.addObject("dis",dis);
+        mv.addObject("fal",fal);
+
         return mv;
     }
 

@@ -205,8 +205,42 @@ width: 100%;height:750px
    <div class="leftBox">
     <div class="lBoxHeader" style="font-size:10px;">
        <div class="pull-left">车辆分布图</div>
-       
-       <div class="pull-right">
+        <div class="pull-left">
+            <div class="form-group selectpo">
+                <label for="name" style=" color: #59b2fb;font-weight: 500;">时间段</label>
+                <input style="width:100px;font-size:12px;" type="text" id="startTime" class="form-control Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+                <label style="color:#59b2fb;">-</label>
+                <input style="width:100px;font-size:12px;"  type="text" id="endTime" class="form-control Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+            </div>
+        </div>
+
+        <div class="pull-left">
+            <div class="form-group selectpo">
+                <%--@declare id="name"--%><label for="name" style=" color: #59b2fb;font-weight: 500;">地区</label>
+                <select class="form-control" style="width:100px;font-size:10px;" id="prov" >
+                    <c:forEach items="${dis}" var="var" varStatus="cs">
+                        <option value="${var.province}">${var.province}</option>
+                    </c:forEach>
+                    <option>全国</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="pull-left">
+            <div class="form-group selectpo">
+                <label for="name" style=" color: #59b2fb;font-weight: 500;">车况</label>
+                <select class="form-control"  id="carstatus">
+                    <c:forEach items="${fal}" var="var" varStatus="cs">
+                        <option value="${var.id}">${var.faultname}</option>
+                    </c:forEach>
+                    <option value="0">全部</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="pull-right">
        <c:if test="${not empty user}">
        <a class="btn btn-primary" href="user/myselfcenter" style="font-size:10px;padding: 3px 25px; border-radius: 20px;margin-left:10px">车辆管理</a>
        </c:if>
@@ -215,7 +249,7 @@ width: 100%;height:750px
      </div>
         <div class="lBoxContent">
 
-            <div id="main" style="height:100%"></div>
+            <div id="main" style="height:100% "></div>
 		</div>
    </div>
 

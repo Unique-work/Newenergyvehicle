@@ -18,6 +18,7 @@
         <mapper resource="com/siit/mapper/FaultInfoMapper.xml"/>
         <mapper resource="com/siit/mapper/FaultSolutionMapper.xml"/>
         <mapper resource="com/siit/mapper/Distribution.xml"/>
+        <mapper resource="com/siit/mapper/FaultMapper.xml"/>
     </mappers>
 
 
