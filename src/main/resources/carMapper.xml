@@ -100,6 +100,11 @@ select * from 	carmessage 	order by id limit  #{start},#{end}
 select * from carmessage where vehID like #{vehID}
 
     </select>
+    <select id="getCarDistri" resultType="com.siit.zsw.pojo.CarMessage">
+
+select count(*) as count,m.* from carmessage m ,cardistribution c where c.carmessageid = m.id and c.distributionid=#{distributionid} group by m.cartype
+
+    </select>
 
     <update id="updateCar" parameterType="com.siit.zsw.dao.CarDao">
         update carmessage

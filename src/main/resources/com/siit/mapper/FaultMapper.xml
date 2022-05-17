@@ -7,6 +7,7 @@
     <result column="faultnumber" jdbcType="INTEGER" property="faultnumber" />
     <result column="faultname" jdbcType="VARCHAR" property="faultname" />
     <result column="proid" jdbcType="INTEGER" property="proid" />
+    <result column="COUNT" property="count"/>
   </resultMap>
   <sql id="Base_Column_List">
     id, faulttype, faultnumber, faultname, proid
@@ -21,6 +22,7 @@
 select  * from fault
 
   </select>
+  <select id="getCountBydid" resultType="java.lang.Integer"></select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from fault
     where id = #{id,jdbcType=INTEGER}
@@ -94,4 +96,12 @@ select  * from fault
       proid = #{proid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getListById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select count(*) as count,f.* from fault f,faultinfo i,carmessage m,cardistribution d where f.faulttype = i.faultLevel and m.vehID = i.vehID and d.carmessageid = m.id and d.distributionid=#{distributionid} group by f.faultname
+	</select>
+
+
+
+
 </mapper>

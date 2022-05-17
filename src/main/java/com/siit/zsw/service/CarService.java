@@ -25,5 +25,4 @@ int deleteBatch(String[] vehId);
     public CarMessage getCarMessageByUser(String userid);
     public void deleteByUserid(String userId);
     public CarMessage getCarMessageByVehID(String vehID);
-//    public List<Distribution> getCarDistri();
-}
+    public List<CarMessage> getCarDistri(int distributionid);}

@@ -17,4 +17,7 @@ public interface FaultMapper {
 
     int updateByPrimaryKey(Fault record);
     public List<Fault> getFault();
+    public List<Fault> getListById(int id);
+    public int getCountBydid(int distributionid);
+
 }

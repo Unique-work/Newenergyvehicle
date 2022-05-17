@@ -26,4 +26,6 @@ public interface CarDao {
 
     //根据vehID获取车辆
     public CarMessage getCarMessageByVehID(String vehID);
+    public List<CarMessage> getCarDistri(int distributionid);
 }
+

@@ -21,9 +21,9 @@ public class ChartService {
 	
 	@Autowired
 	private DistributionMapper distributionMapper;
-	
 
-	
+
+
 	public List<Fault> getFault(){
 		return faultMapper.getFault();
 	}
@@ -34,6 +34,15 @@ public class ChartService {
 
 	public List<Distribution> getCarDistri(){
 		return distributionMapper.getCarDistri();
+	}
+
+
+   	public List<Fault> getListById(int id){
+		return faultMapper.getListById(id);
+	}
+
+	public int getCountBydid(int id){
+		return faultMapper.getCountBydid(id);
 	}
 
 }

@@ -232,7 +232,7 @@ public class IndexController {
         ModelAndView mv = new ModelAndView("fault","faultinfolist",faultinfo);
         return mv;
     }
-    @RequestMapping(value = "/getfault")
+    @RequestMapping(value = "/getfault.do")
     public void getFault(HttpServletRequest req,HttpServletResponse resp)
             throws IOException,ServletException, ParseException {
         int distributionid = Integer.parseInt(req.getParameter("id"));
@@ -250,6 +250,25 @@ public class IndexController {
             fault.add(norf);
         }
         String result=new Gson().toJson(fault);
+        String jsonp = req.getParameter("jsoncallback");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html");
+        if(jsonp != null){
+            result = jsonp+"("+result+")";
+            resp.getWriter().write(result);
+        }else{
+            resp.getWriter().write(result);
+        }
+    }
+
+
+
+    @RequestMapping(value = "/getcartype.do")
+    public void getCarType(HttpServletRequest req,HttpServletResponse resp)
+            throws IOException,ServletException, ParseException {
+        int distributionid = Integer.parseInt(req.getParameter("id"));
+        List<CarMessage> carm = carMessageService.getCarDistri(distributionid);
+        String result=new Gson().toJson(carm);
         String jsonp = req.getParameter("jsoncallback");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html");

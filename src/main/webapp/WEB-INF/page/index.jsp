@@ -164,7 +164,7 @@
 
 			<div class="rBoxContent">
 				<c:forEach items="${distribution}" var="var" varStatus="vs">
-					<div class="row citylists">
+					<div class="row citylists" onclick= "detail('${var.id}','${var.province}')">
 						<div class="pull-left pro">${var.province}</div>
 						<div class="pull-left lable">----------------</div>
 						<div class="pull-left carnum">${var.count}辆</div>
@@ -208,7 +208,7 @@
 		$.ajax({
 			type : "post",
 			async:false,
-			url : '<%=path %>' + "/energy/getfault",
+			url : '<%=path %>' + "/getfault.do",
 			data : {
 				id:id
 			},
@@ -290,7 +290,7 @@
 		$.ajax({
 			type : "post",
 			async:false,
-			url : '<%=path %>' + "/energy/getcartype",
+			url : '<%=path %>' + "/getcartype.do",
 			data : {
 				id:id
 			},

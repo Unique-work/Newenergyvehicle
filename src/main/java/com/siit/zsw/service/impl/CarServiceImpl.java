@@ -6,7 +6,6 @@ import com.github.pagehelper.PageInfo;
 import com.siit.zsw.dao.CarDao;
 import com.siit.zsw.dao.DistributionMapper;
 import com.siit.zsw.pojo.CarMessage;
-import com.siit.zsw.pojo.Distribution;
 import com.siit.zsw.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,6 +75,10 @@ public class CarServiceImpl implements CarService {
         return carDao.getCarMessageByVehID(vehID);
     }
 
+    @Override
+    public List<CarMessage> getCarDistri(int distributionid) {
+        return carDao.getCarDistri(distributionid);
+    }
 
 
     public PageInfo<CarMessage> listBypage(int pageNum, int pageSize) {
