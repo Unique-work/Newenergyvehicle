@@ -17,5 +17,6 @@ public interface DistributionMapper {
 
     int updateByPrimaryKey(DistributionMapper record);
     public List<Distribution> getDistribution();
+    public List<Distribution> getCarDistri();
 
 }

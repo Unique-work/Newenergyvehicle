@@ -273,8 +273,17 @@ width: 100%;height:750px
          	<div class="pull-left pro">${fau.faultstate}</div> 
          	<div class="pull-left lable">----------------</div> 
         	<div class="pull-left carnum">${fau.count}辆</div>
-           	<div class="pull-left cardetial"><a>详情>></a></div>
-          	
+             <c:forEach items="${fau}" var="fau" varStatus="cs">
+                 <div class="row citylists" >
+                     ……
+                     <div class="pull-left cardetail">
+                         <a href="javascript:void(0);" onclick="jumpFault(${fau.fmodID})">
+                             详情>></a>
+                     </div>
+                 </div>
+             </c:forEach>
+
+
          </div>
          </c:forEach>
 
@@ -771,6 +780,9 @@ width: 100%;height:750px
                 myChart.setOption(option);
             }
         });
+    }
+    function jumpFault(type){
+        window.location.href='http://' + location.host + '<%=path%>/'+ '/fault/' + type;
     }
 
 </script>

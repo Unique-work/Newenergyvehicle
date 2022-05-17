@@ -19,4 +19,5 @@ public interface FaultInfoMapper {
     int updateByPrimaryKey(FaultInfo record);
     public List<FaultInfo> getfaultinfoByVehID(String vehID);
     public List<FaultInfo> getfaultcount(Map<String,Object> map);
+    public List<FaultInfo> getfaultinfoBymodID(String modID);
 }

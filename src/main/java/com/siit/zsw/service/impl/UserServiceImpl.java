@@ -42,5 +42,10 @@ public class UserServiceImpl implements UserService {
         return userDao.updateHpic(path,id);
     }
 
+    @Override
+    public User getUserById(String userid) {
+        return userDao.getUserById(userid);
+    }
+
 
 }

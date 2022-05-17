@@ -10,7 +10,7 @@ public class Distribution {
     private BigDecimal longtude;
 
     private BigDecimal latitude;
-
+    private int count;
     private String province;
     private CarMessage carMessage;
 
@@ -56,6 +56,14 @@ public class Distribution {
 
     public String getProvince() {
         return province;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public void setProvince(String province) {

@@ -31,6 +31,10 @@ public class ChartService {
 	public List<Distribution> getDistribution(){
 		return distributionMapper.getDistribution();
 	}
-	
+
+	public List<Distribution> getCarDistri(){
+		return distributionMapper.getCarDistri();
+	}
+
 }
 

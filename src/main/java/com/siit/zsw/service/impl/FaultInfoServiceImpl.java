@@ -22,4 +22,9 @@ public class FaultInfoServiceImpl implements FaultInfoService {
     public List<FaultInfo> getfaultcount(Map<String, Object> map) {
         return faultInfoMapper.getfaultcount(map);
     }
+
+    @Override
+    public List<FaultInfo> getfaultinfoBymodID(String modID) {
+        return faultInfoMapper.getfaultinfoBymodID(modID);
+    }
 }

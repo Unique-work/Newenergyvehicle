@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
@@ -55,7 +54,7 @@ th {
 
 
 <body style="background-color: #124E76;">
-	<jsp:include page="../car/Head.jsp"></jsp:include>
+	<jsp:include page="Head.jsp"></jsp:include>
 	<div class="col-md-12">
 		<div class="col-md-12 right-content" style="margin-top: 10px">
 			<div id='wrapper'>
@@ -106,7 +105,7 @@ th {
 
 			</div>
 		</div>
-		<%@ include file="../car/Bottom.jsp"%>
+		<%@ include file="Bottom.jsp"%>
 	</div>
 
 	<%@ include file="Bottom.jsp"%>

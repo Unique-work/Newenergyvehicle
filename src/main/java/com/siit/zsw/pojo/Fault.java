@@ -10,6 +10,15 @@ public class Fault {
     private String faultname;
 
     private Integer proid;
+    private int count;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     public Integer getId() {
         return id;

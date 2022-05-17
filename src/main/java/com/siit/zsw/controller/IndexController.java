@@ -68,6 +68,15 @@ public class IndexController {
         System.out.println("Accset");
         return "Accset";
     }
+    @RequestMapping(value = "index.do", method = RequestMethod.GET)
+    public ModelAndView index(HttpServletRequest request,
+                              HttpServletResponse response, ModelMap model) {
+        List<Distribution> distribution = chartService.getDistribution();
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("distribution",distribution);
+        mv.setViewName("index");
+        return mv;
+    }
 
     @RequestMapping(value = "/Carposition.do", method = RequestMethod.GET)
     public ModelAndView carposition(HttpServletRequest request,
@@ -141,10 +150,11 @@ public class IndexController {
         }
     }
 
-    @RequestMapping(value = "/carinformation/{vehID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/carinformation.do/{vehID}", method = RequestMethod.GET)
     public ModelAndView carinformation(HttpServletRequest request,
                                        HttpServletResponse response, ModelMap model,@PathVariable String vehID) throws UnsupportedEncodingException {
         String vid = URLDecoder.decode(vehID,"UTF-8");
+        System.out.println(vehID);
         String fdj = "0"; //发动机
         String dc = "0"; //电池
         String sw = "0"; //水温
@@ -155,11 +165,11 @@ public class IndexController {
         String park = "0"; //停车
         String light = "0"; //车灯
         String wheel = "0"; //车轮
-        //CarMessage cm = carMessageService.getCarMessageByVehID(vid);
+        CarMessage cm = carMessageService.getCarMessageByVehID(vid);
         List<CarLocation> cl = carLocationService.getCarMessageByVehID(vid);
         List<FaultInfo> fi = faultInfoService.getfaultinfoByVehID(vid);
         ArrayList<FaultSolution> fs = new ArrayList<>();
-       // User user = userService.getUserById(cm.getUserid());
+        User user = userService.getUserById(cm.getUserid());
         for (FaultInfo fl : fi) {
             if (fl.getFaultstate().equals("发动机")) {
                 fdj = fl.getFaultid();
@@ -192,9 +202,8 @@ public class IndexController {
             fs.add(fsl);
         }
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/WEB-INF/page/car/CarInformation.jsp");
-      //  mv.addObject("carmessage", cm);
-      //  mv.addObject("username", user.getUsername());
+        mv.addObject("carmessage", cm);
+        mv.addObject("username", user.getUsername());
         //mv.addObject("userid", user.getId());
         if (cl != null) {
             mv.addObject("carlocation", cl);
@@ -212,7 +221,44 @@ public class IndexController {
             mv.addObject("wheel", wheel);
         }
         mv.addObject("faultsolution", fs);
+        mv.setViewName("CarInformation");
+
         return mv;
+    }
+    @RequestMapping(value = "/fault/{type}", method = RequestMethod.GET)
+    public ModelAndView fault(HttpServletRequest request,
+                              HttpServletResponse response, ModelMap model,@PathVariable String type) {
+        List<FaultInfo> faultinfo = faultInfoService.getfaultinfoBymodID(type);
+        ModelAndView mv = new ModelAndView("fault","faultinfolist",faultinfo);
+        return mv;
+    }
+    @RequestMapping(value = "/getfault")
+    public void getFault(HttpServletRequest req,HttpServletResponse resp)
+            throws IOException,ServletException, ParseException {
+        int distributionid = Integer.parseInt(req.getParameter("id"));
+        List<Fault> fault = chartService.getListById(distributionid);
+        int faultcount = 0;
+        for (Fault f : fault) {
+            faultcount += f.getCount();
+        }
+        int total = chartService.getCountBydid(distributionid);
+        int normalcount = total - faultcount;
+        if(normalcount != 0){
+            Fault norf = new Fault();
+            norf.setCount(normalcount);
+            norf.setFaultname("正常使用");
+            fault.add(norf);
+        }
+        String result=new Gson().toJson(fault);
+        String jsonp = req.getParameter("jsoncallback");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html");
+        if(jsonp != null){
+            result = jsonp+"("+result+")";
+            resp.getWriter().write(result);
+        }else{
+            resp.getWriter().write(result);
+        }
     }
 
 }

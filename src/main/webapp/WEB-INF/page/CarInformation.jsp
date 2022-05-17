@@ -9,7 +9,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <%@ include file="Head.jsp"%>
-<title>个人中心</title>
+<title>车辆信息</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -19,7 +19,6 @@
 <link href="res/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="resources/css/style.css" />
 <link rel="stylesheet" href="resources/css/page.css" />
-<link rel="stylesheet" href="resources/css/sweetalert.css" />
 <style>
 .guiji {
 	width: 300px;
@@ -174,8 +173,7 @@
 
 <body style="background-color:#124E76;">
 
-	<div class="container-fluid"
-		style="position:absolute;left:0;right:0;top:80px;overflow:auto;height:100%">
+	<div class="container-fluid" style="position:absolute;left:0;right:0;top:80px;overflow:auto;height:100%">
 		<div class="row">
 			<div class="col-md-2">
 				<div class="list-group guiji">
@@ -185,6 +183,7 @@
 							style="background-color:#196BA2;color:#F0F8FD;border:0px solid;">路线轨迹</button>
 					</div>
 					<div class="bheight" style="background-color: #145885;">
+
 						<div id="carlist" style="height:500px;">
 							<img alt="line" src="resources/images/myself/line2.png"
 								style="margin-left: 50%;z-index: -1">
@@ -211,13 +210,13 @@
 					style="height:40px;background-color:#196BA2;border:0px solid #145885;">
 					<button type="button"
 						style="height:20px;background-color:#196BA2;color:#F0F8FD;border:0px solid #145885;">实时车况</button>
-					</button>
-					
+						<a class="btn btn-primary btn-sm" style="float: right;margin-top: -5px;"
+						 onClick="javascript:history.back(-1);">返回</a>
+						<a class="btn btn-primary btn-sm" data-toggle="modal"
+							style="float: right;margin-top: -5px;" data-target="#searchmodal">车辆信息</a>
 				</div>
 				<div class="bheight" style="background-color: #145885">
-					
-					<c:if test="${not empty carmessage }">
-						<div class="col-md-12" style="width:102%">
+						<div class="col-md-12">
 							<div class="col-lg-3">
 								<div style="margin-top: 50px;text-align: center;">
 									<img alt="run" src="resources/images/myself/run.png"
@@ -240,6 +239,7 @@
 										<span style="color: #20c8ff;font-size: 18px">正常工作</span>
 									</div>
 								</c:if>
+
 								<c:if test="${dc != '0'}">
 									<div class="dc">
 										<img alt="fdj2" src="resources/images/myself/dc2.png"> <span
@@ -247,6 +247,7 @@
 											style="color: #ffee62;font-size: 18px">电池故障</span>
 									</div>
 								</c:if>
+
 								<c:if test="${dc == '0'}">
 									<div class="dc">
 										<img alt="fdj2" src="resources/images/myself/dc1.png"> <span
@@ -254,6 +255,7 @@
 											style="color: #20c8ff;font-size: 18px">正常工作</span>
 									</div>
 								</c:if>
+
 								<c:if test="${sw == '0'}">
 									<div class="sw">
 										<div class="col-md-6">
@@ -265,6 +267,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${sw != '0'}">
 									<div class="sw">
 										<div class="col-md-6">
@@ -276,6 +279,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${zczd == '0'}">
 									<div class="zczd" style="">
 										<div class="col-md-5">
@@ -287,6 +291,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${zczd != '0'}">
 									<div class="zczd">
 										<div class="col-md-5">
@@ -298,6 +303,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${jy == '0'}">
 									<div class="jy">
 										<div class="col-md-6">
@@ -321,6 +327,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${abs == '0'}">
 									<div class="abs">
 										<div class="col-md-6">
@@ -332,6 +339,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${abs != '0'}">
 									<div class="abs">
 										<div class="col-md-6">
@@ -343,6 +351,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${dp == '0'}">
 									<div class="dp">
 										<div class="col-md-6">
@@ -354,6 +363,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${dp != '0'}">
 									<div class="dp">
 										<div class="col-md-6">
@@ -365,6 +375,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${park == '0'}">
 									<div class="park">
 										<div class="col-md-6">
@@ -376,6 +387,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${park != '0'}">
 									<div class="park">
 										<div class="col-md-6">
@@ -387,6 +399,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${light == '0'}">
 									<div class="light">
 										<div class="col-md-6">
@@ -398,6 +411,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${light != '0'}">
 									<div class="light">
 										<div class="col-md-6">
@@ -409,6 +423,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${wheel == '0'}">
 									<div class="wheel">
 										<div class="col-md-6">
@@ -420,6 +435,7 @@
 										</div>
 									</div>
 								</c:if>
+
 								<c:if test="${wheel != '0'}">
 									<div class="wheel">
 										<div class="col-md-6">
@@ -433,7 +449,6 @@
 								</c:if>
 							</div>
 						</div>
-					</c:if>
 				</div>
 			</div>
 
@@ -445,18 +460,16 @@
 							style="background-color:#196BA2;color:#F0F8FD;border:0px solid;">故障提醒</button>
 					</div>
 					<div class="bheight" style="background-color: #145885;">
-						<c:if test="${not empty carmessage }">
 							<img alt="guzhang" src="resources/images/myself/fault.png"
 								style="margin-top: 50px;margin-left: 50px">
-							<div id="carlist" style="height:500px;">
+							<div id="carlist2" style="height:500px;">
 								<c:forEach items="${faultsolution}" var="fs" varStatus="fst">
 									<div style="color: #ffee62;margin-left: 50px;margin-top: 20px;">
 										<h3>${fs.remarks}</h3>
-										<span style="font-size: 20px">建议：${fs.faultsolution}</span>
+										<span style="font-size: 20px">建议：${fs.faultSolution}</span>
 									</div>
 								</c:forEach>
 							</div>
-						</c:if>
 					</div>
 				</div>
 			</div>
@@ -464,6 +477,111 @@
 	</div>
 	<%@ include file="Bottom.jsp"%>
 
-	<script src="resources/js/sweetalert.min.js"></script>
+	<div id="searchmodal" class="modal mymodal" aria-hidden="true"
+		style="display: none;left:10%">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title">车辆信息</h4>
+				</div>
+				<div class="modal-body">
+					<form id="user-create-form" class="form-horizontal" method="post"
+						action="/admin/user/create" novalidate="novalidate">
+						<div class="row form-group">
+							<div class="col-md-3 control-label">
+								<label for="vehID">车辆ID<span class="xb"></span></label>
+							</div>
+							<div class="col-md-7 controls">
+								<input type="text" id="vehID" name="vehID" class="form-control"
+									readonly="readonly" value="${carmessage.vehID }">
+								<div class="help-block" style="display:none;"></div>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-3 control-label">
+								<label for="plateNumber">车牌号<span class="xb"></span></label>
+							</div>
+							<div class="col-md-7 controls">
+								<input type="text" id="plateNumber" name="plateNumber"
+									class="form-control" readonly="readonly"
+									value="${carmessage.plateNumber}">
+								<div class="help-block" style="display:none;"></div>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-3 control-label">
+								<label for="brand">品牌<span class="xb"></span></label>
+							</div>
+							<div class="col-md-7 controls">
+								<input type="text" id="brand" name="brand" class="form-control"
+									readonly="readonly" value="${carmessage.brand}">
+								<div class="help-block" style="display:none;"></div>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-3 control-label">
+								<label for="currentMileage"> 当前里程数</label>
+							</div>
+							<div class="col-md-7 controls">
+								<input type="text" id="currentMileage" name="currentMileage"
+									class="form-control" readonly="readonly"
+									value="${carmessage.currentMileage}">
+								<div class="help-block" style="display:none;"></div>
+							</div>
+						</div>
+						<div class="row form-group">
+							<label for="produceDate" class="col-md-3 control-label">出厂日期</label>
+							<div class="col-md-7 controls"
+								style="margin-top: 5px;margin-left: 10px;">
+								<fmt:setLocale value="zh" />
+								<fmt:formatDate value="${carmessage.produceDate}" />
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-3 control-label">
+								<label for="userId">归属人</label>
+							</div>
+							<input id="username" class="form-control"
+								value="${username}" style="margin-left: 16px;"
+								readonly="readonly"> <input id="userid"
+								value="${userid}" type="hidden">
+						</div>
+						<div class="row form-group">
+							<div class="col-md-3 control-label">
+								<label for="carType1">车辆类型</label>
+							</div>
+							<input type="text" id="carType1" name="carType"
+									class="form-control" readonly="readonly"
+									value="${carmessage.carType}" style="margin-left: 16px;">
+						</div>
+						<div class="row form-group">
+							<div class="col-md-3 control-label">
+								<label for="remarks">说明</label>
+							</div>
+							<div class="col-md-7 controls">
+								<input type="text" id="remarks" name="remarks"
+									class="form-control" readonly="readonly"
+									value="${carmessage.remarks}">
+								<div class="help-block" style="display:none;"></div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button " class=" btn btn-primary pull-right"
+						data-dismiss="modal" aria-hidden="true">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+	<script src="res/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script
+		src="<%=basePath%>/resources/Widget/My97DatePicker/WdatePicker.js"
+		type="text/javascript"></script>
 </body>
 </html>

@@ -4,7 +4,9 @@ package com.siit.zsw.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.siit.zsw.dao.CarDao;
+import com.siit.zsw.dao.DistributionMapper;
 import com.siit.zsw.pojo.CarMessage;
+import com.siit.zsw.pojo.Distribution;
 import com.siit.zsw.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,8 @@ import java.util.Map;
 public class CarServiceImpl implements CarService {
     @Autowired
     CarDao carDao;
-
+    @Autowired
+    DistributionMapper distributionMapper;
     @Override
     public List<CarMessage> listAllCar() {
         return carDao.list();
@@ -67,6 +70,13 @@ public class CarServiceImpl implements CarService {
     public void deleteByUserid(String userId) {
         carDao.deleteByUserid(userId);
     }
+
+    @Override
+    public CarMessage getCarMessageByVehID(String vehID) {
+        return carDao.getCarMessageByVehID(vehID);
+    }
+
+
 
     public PageInfo<CarMessage> listBypage(int pageNum, int pageSize) {
         //pageNum要显示的第几页，pageSize每页显示几条

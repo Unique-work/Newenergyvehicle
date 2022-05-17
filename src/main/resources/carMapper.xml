@@ -26,6 +26,9 @@ WHERE
 	vehId = #{vehId}
 
  </delete>
+    <delete id="deleteByUserid">
+
+    </delete>
 
     <select id="list" resultType="com.siit.zsw.pojo.CarMessage">
  SELECT
@@ -88,13 +91,13 @@ FROM
     </select>
     <select id="searchCarMessage" resultType="com.siit.zsw.pojo.CarMessage">
 
-
+select * from 	carmessage 	order by id limit  #{start},#{end}
 
 
     </select>
     <select id="getCarMessageByVehID" resultType="com.siit.zsw.pojo.CarMessage">
 
-
+select * from carmessage where vehID like #{vehID}
 
     </select>
 

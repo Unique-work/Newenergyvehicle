@@ -23,6 +23,16 @@ VALUES(#{id},#{username},#{password},#{createtime},#{nickname},#{birthdate},#{se
     <select id="selectUserByUser" parameterType="String" resultType="com.siit.zsw.pojo.User">
 SELECT * FROM `user` WHERE username=#{username}
     </select>
+    <select id="getUserById" resultType="com.siit.zsw.pojo.User">
+select * from user where id = #{id}
+
+    </select>
+    <!-- 根据用户名查询用户信息 -->
+    <select id="getUserByUsername" parameterType="java.lang.String"
+            resultType="com.siit.zsw.pojo.User">
+		select * from user where username = #{username}
+	</select>
+
     <update id="updateHpic">
         UPDATE `user` SET hpic=#{path} WHERE id=#{id}
     </update>

@@ -47,6 +47,7 @@
   <servlet-mapping>
     <servlet-name>app</servlet-name>
     <url-pattern>*.do</url-pattern>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
   <!--配置解决中文乱码问题的过滤器-->
   <filter>
@@ -64,6 +65,12 @@
   </filter-mapping>
 
 
+  <!--log4j配置文件开始-->
+<!--  <context-param>-->
+<!--    <param-name>log4jConfigLocation</param-name>-->
+<!--    <param-value>classpath:log4j.properties</param-value>-->
+<!--  </context-param>-->
+  <!--log4j配置文件结束-->
 
 
 </web-app>

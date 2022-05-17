@@ -3,6 +3,7 @@ package com.siit.zsw.service;
 
 
 import com.siit.zsw.pojo.CarMessage;
+import com.siit.zsw.pojo.Distribution;
 
 import java.util.List;
 import java.util.Map;
@@ -23,4 +24,6 @@ int deleteBatch(String[] vehId);
     int delete(String vehId);
     public CarMessage getCarMessageByUser(String userid);
     public void deleteByUserid(String userId);
+    public CarMessage getCarMessageByVehID(String vehID);
+//    public List<Distribution> getCarDistri();
 }

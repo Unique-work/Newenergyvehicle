@@ -11,4 +11,6 @@ public interface UserService {
     User login(String username,String password);
     User selectUserByUser(String username);
     int updateHpic(String path,String id);
+    //根据id获取信息
+    public User getUserById(String userid);
 }

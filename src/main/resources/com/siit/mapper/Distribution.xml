@@ -102,4 +102,8 @@
 select * from distribution
 
   </select>
+    <select id="getCarDistri" resultType="com.siit.zsw.pojo.Distribution">
+		select count(*) as count,d.* from distribution d ,cardistribution c where c.distributionid = d.id group by d.province
+
+    </select>
 </mapper>
