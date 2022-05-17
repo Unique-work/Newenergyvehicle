@@ -9,7 +9,7 @@
 <html>
 <%@ include file="Head.jsp" %>
 <title>login.jsp</title>
-<link href="res/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="res\bootstrap\css\bootstrap.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="resources/css/page.css"/>
 <link rel="stylesheet" href="resources/css/style.css"/>
 <script src="resources\js\jquery-3.1.1.min.js"></script>

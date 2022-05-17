@@ -192,6 +192,8 @@
 		</div>
 	</div>
 </div>
+
+
 <%@ include file="Bottom.jsp"%>
 </body>
 <script>
@@ -205,8 +207,9 @@
 		var chart = echarts.init(document.getElementById('chart'));
 		var type = [];
 		var number = [];
+		alert("drawChart")
 		$.ajax({
-			type : "post",
+			type : "GET",
 			async:false,
 			url : '<%=path %>' + "/getfault.do",
 			data : {
@@ -215,6 +218,7 @@
 			dataType : "jsonp",
 			jsonp:"jsoncallback",
 			success : function(data){
+				alert("getfault.do")
 				for(var i=0;i<data.length;i++){
 					myPie=new pie(data[i].count,data[i].faultname);
 					type.push(data[i].faultname);
@@ -277,9 +281,12 @@
 	}
 
 	function detail(id,prov){
+		alert("do1");
 		$("#myModal").modal('show');
 		$("#myModalLabel").html(prov);
+		alert("do2")
 		drawChart(id);
+		alert("do");
 		drawLine(id);
 	}
 
@@ -287,8 +294,9 @@
 		var line = echarts.init(document.getElementById('line'));
 		var type = [];
 		var number = [];
+		alert("drawLine")
 		$.ajax({
-			type : "post",
+			type : "GET",
 			async:false,
 			url : '<%=path %>' + "/getcartype.do",
 			data : {
@@ -297,6 +305,7 @@
 			dataType : "jsonp",//数据类型为json
 			jsonp:"jsoncallback",
 			success : function(data){
+				alert("getcartype.do")
 				for(var i=0;i<data.length;i++){
 					type.push(data[i].cartype);
 					number.push(data[i].count);

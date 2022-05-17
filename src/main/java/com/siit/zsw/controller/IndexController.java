@@ -232,7 +232,8 @@ public class IndexController {
         ModelAndView mv = new ModelAndView("fault","faultinfolist",faultinfo);
         return mv;
     }
-    @RequestMapping(value = "/getfault.do")
+
+    @RequestMapping( "getfault.do")
     public void getFault(HttpServletRequest req,HttpServletResponse resp)
             throws IOException,ServletException, ParseException {
         int distributionid = Integer.parseInt(req.getParameter("id"));
@@ -260,10 +261,7 @@ public class IndexController {
             resp.getWriter().write(result);
         }
     }
-
-
-
-    @RequestMapping(value = "/getcartype.do")
+    @RequestMapping("getcartype.do")
     public void getCarType(HttpServletRequest req,HttpServletResponse resp)
             throws IOException,ServletException, ParseException {
         int distributionid = Integer.parseInt(req.getParameter("id"));
@@ -279,5 +277,4 @@ public class IndexController {
             resp.getWriter().write(result);
         }
     }
-
 }
