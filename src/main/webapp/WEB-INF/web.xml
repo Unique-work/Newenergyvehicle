@@ -46,7 +46,7 @@
 
   <servlet-mapping>
     <servlet-name>app</servlet-name>
-    <url-pattern>*.do</url-pattern>
+<!--    <url-pattern>*.do</url-pattern>-->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   <!--配置解决中文乱码问题的过滤器-->
