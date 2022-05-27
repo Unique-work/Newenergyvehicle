@@ -65,7 +65,35 @@
                     <div class="pull-left" style="color:#F0F8FD">我的车友</div>
                     <a class="pull-right" href="javascript:void(0)" data-toggle="modal" data-target="#car_manager"
                        style="color:#F0F8FD">添加车友</a>
-                    <div class="clearfix"></div>
+                    <div class="clearfix">
+                        <div class="list-group-item active" style="background-color:#196BA2;">
+                            <div class="pull-left" style="color:#F0F8FD">我的车友(${count}人)</div>
+                            <a class="pull-right" href="javascript:void(0)" data-toggle="modal" data-target="#car_manager" style="color:#F0F8FD">添加车友</a>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="carlist">
+                            <c:forEach items="${carfriends}" var="var" varStatus="vs">
+                                <div class="list-group-item list-group-item-content">
+                                    <div class="col-md-3">
+                                        <img src="${var.user.hpic}" class="img-circle" border="0" height="50" id="pic" width="50"/>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div>${var.user.username }</div>
+                                        <div style="margin-top:5px;">
+                                            <span style="float:left;">${var.carmessage.brand }</span>
+                                            <c:if test="${not empty var.carmessage.brand}">
+                                                <span style="float:left;">&nbsp;·&nbsp;</span>
+                                            </c:if>
+                                            <span style="float:left;">${var.carmessage.plateNumber }</span>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </c:forEach>
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
         </div>

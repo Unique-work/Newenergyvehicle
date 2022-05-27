@@ -12,6 +12,25 @@ public class carfriend {
     private String userid;
 
     private String friendid;
+    private User user;
+
+    private CarMessage carmessage;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public CarMessage getCarmessage() {
+        return carmessage;
+    }
+
+    public void setCarmessage(CarMessage carmessage) {
+        this.carmessage = carmessage;
+    }
 
     public Integer getId() {
         return id;

@@ -5,10 +5,7 @@ import com.siit.zsw.pojo.*;
 import com.siit.zsw.service.CarLocationService;
 import com.siit.zsw.service.ChartService;
 import com.siit.zsw.service.FaultInfoService;
-import com.siit.zsw.service.impl.CarLocationServiceImpl;
-import com.siit.zsw.service.impl.CarServiceImpl;
-import com.siit.zsw.service.impl.FaultSoltionServiceImpl;
-import com.siit.zsw.service.impl.UserServiceImpl;
+import com.siit.zsw.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,6 +30,7 @@ import java.util.Map;
 
 @Controller
 public class IndexController {
+
     @Autowired
     private UserServiceImpl userService;
 
@@ -48,6 +46,9 @@ public class IndexController {
 
     @Autowired
     private ChartService chartService;
+
+    @Autowired
+    private CarFriendServiceImpl carFriendService;
     @RequestMapping("index.do")
     public String indexto(){
         System.out.println("index");
@@ -277,4 +278,29 @@ public class IndexController {
             resp.getWriter().write(result);
         }
     }
+
+    @RequestMapping(value = "/myring.do", method = RequestMethod.GET)
+    public ModelAndView myring(HttpServletRequest request,
+                               HttpServletResponse response, ModelMap model) {
+        User us = (User)request.getSession().getAttribute("user");
+        String userid = us.getId();
+        List<carfriend> carfriends = carFriendService.getFriendByUserId(userid);
+        for (carfriend f : carfriends) {
+            User user2 = new User();
+            String p = f.getUser().getHpic();
+            String n = f.getUser().getUsername();
+            if(p!=null&&!p.equals("")){
+                String hpic = "upload" + f.getUser().getHpic().substring(f.getUser().getHpic().lastIndexOf('\\'));
+                user2.setHpic(hpic);
+                user2.setUsername(n);
+                f.setUser(user2);
+            }
+        }
+        int count = carFriendService.getCount(userid);
+        ModelAndView mv =
+                new ModelAndView("Myring","carfriends", carfriends);
+        mv.addObject("count",count);
+        return mv;
+    }
+
 }
