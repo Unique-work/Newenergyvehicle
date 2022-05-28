@@ -21,8 +21,14 @@ public class Comment {
 
     private int id;
 
+    private String text;
+
     private int contentid;
 
+    private Date time;
+
     private String userid;
+
+    private User user;
 
 }

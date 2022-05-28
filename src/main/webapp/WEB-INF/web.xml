@@ -32,10 +32,14 @@
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.js</url-pattern>
+    <url-pattern>*.json</url-pattern>
+    <url-pattern>*.woff2</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.css</url-pattern>
+    <url-pattern>*.woff</url-pattern>
+    <url-pattern>*.ttf</url-pattern>
   </servlet-mapping>
 
   <listener>

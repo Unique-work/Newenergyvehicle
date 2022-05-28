@@ -218,6 +218,25 @@ alert("do")
         });
     });
 </script>
+
+<script type="text/javascript">
+    function saveContent(){
+        var txt = editor.getContent();
+        var text= encodeURIComponent(txt);
+        $.ajax({
+            type : "post",
+            url : '<%=path %>'+"/saveContent.do",
+            data : {
+                txt : text,
+            },
+            success : function(data){
+                swal("", "发布成功！", "success");
+                setTimeout("location.href = 'http://" + location.host + "<%=path%>"
+                    +"/myring.do'",500);		}
+        });
+    }
+</script>
+
 <%--编写Ajax方法saveContent()，该方法由“提交”按钮触发，将转发请求至控制层，方法代码如下：--%>
 <script type="text/javascript">
     function saveContent(){
@@ -225,14 +244,14 @@ alert("do")
         var text= encodeURIComponent(txt);
         $.ajax({
             type : "post",
-            url : '<%=path %>'+"/ring/saveContent",
+            url : '<%=path %>'+"/saveContent.do",
             data : {
                 txt : text,
             },
             success : function(data){
                 swal("", "发布成功！", "success");
                 setTimeout("location.href = 'http://" + location.host + "<%=path%>"
-                    +"/energy/myring'",500);		}
+                    +"/myring.do'",500);		}
         });
     }
 </script>
