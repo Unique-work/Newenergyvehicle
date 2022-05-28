@@ -39,7 +39,7 @@ public class MyRingController {
     /**
      * 车友圈添加车友
      */
-    @RequestMapping("/addcarfriend")
+    @RequestMapping("/addcarfriend.do")
     public void addCarFriend(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException, ParseException {
         String carfname = req.getParameter("carfname");

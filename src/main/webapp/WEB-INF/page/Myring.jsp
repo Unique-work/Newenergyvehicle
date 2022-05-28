@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="resources/css/style.css"/>
     <link rel="stylesheet" href="resources/css/page.css"/>
     <link rel="stylesheet" href="resources/css/sweetalert.css"/>
+    <script src="resources/Widget/ueditor/ueditor.config.js" type="text/javascript" ></script>
+    <script src="resources/Widget/ueditor/ueditor.all.js" type="text/javascript" ></script>
+    <script src="resources/Widget/ueditor/lang/zh-cn/zh-cn.js" type="text/javascript" ></script>
+
     <style>
         .content {
             position: absolute;
@@ -107,6 +111,7 @@
                     <button type="button"
                             style="float:right;height:20px;background-color:#3FA1E2;color:#F0F8FD;border:0px solid;">
                         <span class="glyphicon glyphicon-camera"></span> 发布信息
+                        <button type="button" data-toggle="modal" data-target="#carContent">发布信息</button>
                     </button>
                 </div>
 
@@ -136,6 +141,30 @@
         </div>
     </div>
 </div>
+<!--模态对话框-->
+<div class="modal fade" id="carContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">
+                    车友圈信息分享</h4>
+                <div class="modal-body">
+                    <script id="container" type="text/plain"></script>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" onclick="saveContent()" class="btn btn-primary">
+                    发送
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <%@ include file="Bottom.jsp" %>
 <script src="resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
@@ -146,6 +175,66 @@
 <script>
 	function addCarFriend() {
 alert("do")
-	}
+        var carfname = $("#carfname").val();
+        $.ajax({
+            type : "post",
+            url : '<%=path %>'+"/addcarfriend.do",
+            dataType : "jsonp",
+            jsonp:"jsoncallback",
+            data : {
+                carfname:carfname
+            },
+            success : function(data){
+                if(data=="error"){
+                    alert("不存在该用户！");
+                }else if(data=="repeat"){
+                    alert("该车友已添加！");
+                }else{
+                    swal("", "添加成功!", "success");
+                    $("#carfname").val("");
+                    setTimeout("location.href = 'http://" + location.host + "<%=path%>/"
+                        +"/myring.do'",500);
+                }
+            }
+        });
+
+    }
 </script>
+<script type="text/javascript">
+    var editor;
+    $(function() {
+        UE.Editor.prototype._bkGetActionUrl=UE.Editor.prototype.getActionUrl;
+        UE.Editor.prototype.getActionUrl=function(action){
+            if (action == 'uploadimage'){
+                return "<%=path%>"+"/ueditor/upload.do?Type=Image&mark=1";
+            }else{
+                return this._bkGetActionUrl.call(this, action);
+            }
+        };
+        editor = UE.getEditor('container',{
+            toolbars:[['bold','indent','italic','underline','fontborder','simpleupload','justifyleft','justifyright','justifycenter','justifyjustify','forecolor','backcolor']],
+            wordCount:false,
+            elementPathEnabled:false,
+        });
+    });
+</script>
+<%--编写Ajax方法saveContent()，该方法由“提交”按钮触发，将转发请求至控制层，方法代码如下：--%>
+<script type="text/javascript">
+    function saveContent(){
+        var txt = editor.getContent();
+        var text= encodeURIComponent(txt);
+        $.ajax({
+            type : "post",
+            url : '<%=path %>'+"/ring/saveContent",
+            data : {
+                txt : text,
+            },
+            success : function(data){
+                swal("", "发布成功！", "success");
+                setTimeout("location.href = 'http://" + location.host + "<%=path%>"
+                    +"/energy/myring'",500);		}
+        });
+    }
+</script>
+
 </html>

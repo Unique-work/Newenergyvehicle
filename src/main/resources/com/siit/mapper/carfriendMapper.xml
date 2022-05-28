@@ -259,26 +259,26 @@
 
     <insert id="saveCarFriend" parameterType="com.siit.zsw.pojo.carfriend">
         insert into carfriend
-        <trim suffix="(" prefix=")" suffixOverrides=",">
-            <if test="carfname">CARFNAME,</if>
-            <if test="cartype">CARTYPE,</if>
-            <if test="carnumber">CARNUMBER,</if>
-            <if test="userid">USERID,</if>
+        <trim suffix=")" prefix="(" suffixOverrides=",">
+            <if test="carfname!=null">CARFNAME,</if>
+            <if test="cartype!= null">CARTYPE,</if>
+            <if test="carnumber!= null">CARNUMBER,</if>
+            <if test="userid!= null">USERID,</if>
 
-            <if test="friendid">FRIENDID,</if>
+            <if test="friendid!= null">FRIENDID,</if>
 
 
         </trim>
 
         values
-        <trim suffix="(" prefix=")" suffixOverrides=",">
-            <if test="carfname">#{carfname},</if>
-            <if test="cartype">#{cartype},</if>
-            <if test="userid">#{userid},</if>
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="carfname!= null">#{carfname},</if>
+            <if test="cartype!= null">#{cartype},</if>
+            <if test="userid!= null">#{userid},</if>
 
-            <if test="carnumber">#{carnumber},</if>
+            <if test="carnumber!= null">#{carnumber},</if>
 
-            <if test="">#{friendid}</if>
+            <if test="friendid!= null">#{friendid}</if>
 
 
         </trim>
