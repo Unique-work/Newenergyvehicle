@@ -15,4 +15,6 @@ import java.util.List;
 public interface CommentMapper {
 
     public List<Comment> getComment();
+    public void saveComment(Comment comment);
+
 }

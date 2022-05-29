@@ -1,6 +1,7 @@
 package com.siit.zsw.dao;// 直接赋值粘贴，删除CSDN的权限转载中文
 
 import com.siit.zsw.pojo.Content;
+import com.siit.zsw.pojo.ContentPraise;
 
 import java.util.List;
 
@@ -15,4 +16,7 @@ import java.util.List;
 public interface ContentMapper {
     public void saveContent(Content content);
     public List<Content> getContentByfid(String userid);
+    public Content getContentById(int id);
+    public void updateContent(Content content);
+
 }

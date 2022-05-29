@@ -12,6 +12,7 @@ import java.util.List;
  **/
 
 
-public interface CommentServic {
+public interface CommentService {
     public List<Comment> getComment();
+    public void saveComment(Comment comment);
 }

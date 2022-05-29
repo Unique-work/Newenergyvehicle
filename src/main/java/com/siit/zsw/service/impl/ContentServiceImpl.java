@@ -29,4 +29,14 @@ public class ContentServiceImpl implements ContentService {
         return contentMapper.getContentByfid(userid);
     }
 
+    @Override
+    public Content getContentById(int id) {
+        return contentMapper.getContentById(id);
+    }
+
+    @Override
+    public void updateContent(Content content) {
+    contentMapper.updateContent(content);
+    }
+
 }

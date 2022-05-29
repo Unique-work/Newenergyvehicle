@@ -22,6 +22,7 @@
         <mapper resource="com/siit/mapper/carfriendMapper.xml"/>
         <mapper resource="com/siit/mapper/ContentMapper.xml"/>
         <mapper resource="com/siit/mapper/ CommentMapper.xml"/>
+        <mapper resource="com/siit/mapper/ContentPraiseMapper.xml"/>
     </mappers>
 
 

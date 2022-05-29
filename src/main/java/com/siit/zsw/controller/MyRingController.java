@@ -1,10 +1,9 @@
 package com.siit.zsw.controller;// 直接赋值粘贴，删除CSDN的权限转载中文
 
 import com.google.gson.Gson;
-import com.siit.zsw.pojo.CarMessage;
-import com.siit.zsw.pojo.Content;
-import com.siit.zsw.pojo.User;
-import com.siit.zsw.pojo.carfriend;
+import com.siit.zsw.pojo.*;
+import com.siit.zsw.service.CommentService;
+import com.siit.zsw.service.ContentPraiseService;
 import com.siit.zsw.service.ContentService;
 import com.siit.zsw.service.impl.CarFriendServiceImpl;
 import com.siit.zsw.service.impl.CarServiceImpl;
@@ -43,6 +42,11 @@ public class MyRingController {
     @Autowired
     private ContentService contentService;
 
+    @Autowired
+    private CommentService commentService;
+
+    @Autowired
+    private ContentPraiseService contentPraiseService;
     /**
      * 车友圈添加车友
      */
@@ -111,4 +115,91 @@ public class MyRingController {
 
 
     }
+
+    @RequestMapping("/addpraise.do")
+    public void addpraise(HttpServletRequest req,HttpServletResponse resp)
+            throws IOException,ServletException, ParseException {
+        int pid = Integer.parseInt(req.getParameter("pid"));
+        Content praise = contentService.getContentById(pid);
+        User user = (User)req.getSession().getAttribute("user");
+        String userid = user.getId();
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("contentid", pid);
+        map.put("userid", userid);
+        ContentPraise cp = contentPraiseService.getContentPraiseByUserId(map);
+        String result = "";
+        if(cp!=null){
+            result=new Gson().toJson("repeat");
+        }else{
+            int count = praise.getPraise();
+            count++;
+            praise.setPraise(count);
+            ContentPraise contentpraise = new ContentPraise();
+            contentpraise.setContentid(pid);
+            contentpraise.setUserid(userid);
+            contentPraiseService.saveContentPraise(contentpraise);
+            contentService.updateContent(praise);
+            result=new Gson().toJson(praise);
+        }
+        String jsonp = req.getParameter("jsoncallback");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html");
+        if(jsonp != null){
+            result = jsonp+"("+result+")";
+            resp.getWriter().write(result);
+        }else{
+            resp.getWriter().write(result);
+        }
+    }
+    @RequestMapping("/sendcomment.do")
+    public void sendcomment(HttpServletRequest req,HttpServletResponse resp)
+            throws IOException,ServletException, ParseException {
+        int cid = Integer.parseInt(req.getParameter("cid"));
+        String text = req.getParameter("text");
+        User user = (User)req.getSession().getAttribute("user");
+        String userid = user.getId();
+        Comment comment = new Comment();
+        comment.setText(text);
+        comment.setContentid(cid);
+        comment.setTime(new Date());
+        comment.setUserid(userid);
+        User u = userService.getUserById(userid);
+        String h = u.getHpic();
+        String hpic = "\\"+"upload" + h.substring(h.lastIndexOf('\\'));
+        commentService.saveComment(comment);
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("hpic", hpic);
+        map.put("text",text);
+        String result=new Gson().toJson(map);
+        String jsonp = req.getParameter("jsoncallback");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html");
+        if(jsonp != null){
+            result = jsonp+"("+result+")";
+            resp.getWriter().write(result);
+        }else{
+            resp.getWriter().write(result);
+        }
+    }
+    @RequestMapping("/addcomment.do")
+    public void addcomment(HttpServletRequest req,HttpServletResponse resp)
+            throws IOException,ServletException, ParseException {
+        int cid = Integer.parseInt(req.getParameter("cid"));
+        Content comment = contentService.getContentById(cid);
+        int count = comment.getComments();
+        count++;
+        comment.setComments(count);
+        contentService.updateContent(comment);
+        String result=new Gson().toJson(comment);
+        String jsonp = req.getParameter("jsoncallback");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html");
+        if(jsonp != null){
+            result = jsonp+"("+result+")";
+            resp.getWriter().write(result);
+        }else{
+            resp.getWriter().write(result);
+        }
+    }
+
 }

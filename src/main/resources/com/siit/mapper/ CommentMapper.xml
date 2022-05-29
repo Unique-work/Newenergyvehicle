@@ -17,4 +17,9 @@
     <select id="getComment" resultMap="comment">
 		select * from comment c LEFT JOIN user u on u.id=c.userid
 	</select>
+
+    <insert id="saveComment" parameterType="com.siit.zsw.pojo.Comment">
+		insert into comment(TEXT,CONTENTID,TIME,USERID) 	values(#{text},#{contentid},#{time},#{userid})
+</insert>
+
 </mapper>

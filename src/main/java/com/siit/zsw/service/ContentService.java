@@ -8,4 +8,6 @@ import java.util.List;
 public interface ContentService {
     public void saveContent(Content content);
     public List<Content> getContentByfid(String userid);
+    public Content getContentById(int id);
+    public void updateContent(Content content);
 }

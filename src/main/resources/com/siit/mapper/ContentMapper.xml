@@ -32,5 +32,12 @@
 		(select c.*,u.hpic,u.username from content c LEFT JOIN user u on c.userid = u.id
 		where c.userid in (#{userid})  order by releasetime desc)
 </select>
+    <select id="getContentById" parameterType="java.lang.Integer" resultMap="content">
+		select * from content where id = #{id} order by releasetime desc
+</select>
+
+    <update id="updateContent" parameterType="com.siit.zsw.pojo.Comment">
+	update content set TXT=#{txt},PRAISE=#{praise},COMMENTS=#{comments},RELEASETIME=#{releasetime} where id=#{id}
+</update>
 
 </mapper>

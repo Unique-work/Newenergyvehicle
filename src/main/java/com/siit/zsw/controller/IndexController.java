@@ -52,7 +52,7 @@ public class IndexController {
     @Autowired
     private ContentServiceImpl contentService;
     @Autowired
-    private CommentServicImpl commentServic;
+    private CommentServiceImpl commentServic;
     @RequestMapping("index.do")
     public String indexto(){
         System.out.println("index");
