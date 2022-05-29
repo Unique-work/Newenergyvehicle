@@ -24,4 +24,13 @@
     <insert id="saveContent" parameterType="com.siit.zsw.pojo.Content">
 		insert into content(TXT,PRAISE,COMMENTS,RELEASETIME,USERID) values(#{txt},#{praise},#{comments},#{releasetime},#{userid})
 	</insert>
+
+    <select id="getContentByfid" parameterType="java.lang.String" resultMap="content">
+		(select c.*,u.hpic,u.username from content c LEFT JOIN user u on c.userid = u.id
+		where c.userid in (select f.friendid from carfriend f where f.userid = #{userid}) order by releasetime desc)
+		union
+		(select c.*,u.hpic,u.username from content c LEFT JOIN user u on c.userid = u.id
+		where c.userid in (#{userid})  order by releasetime desc)
+</select>
+
 </mapper>

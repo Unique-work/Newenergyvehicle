@@ -6,6 +6,8 @@ import com.siit.zsw.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @program: Newenergyvehicle
  * @description:
@@ -20,6 +22,11 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public void saveContent(Content content){
         contentMapper.saveContent(content);
+    }
+
+    @Override
+    public List<Content> getContentByfid(String userid) {
+        return contentMapper.getContentByfid(userid);
     }
 
 }

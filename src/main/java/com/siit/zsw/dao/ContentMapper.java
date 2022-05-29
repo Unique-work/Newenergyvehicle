@@ -2,6 +2,8 @@ package com.siit.zsw.dao;// 直接赋值粘贴，删除CSDN的权限转载中文
 
 import com.siit.zsw.pojo.Content;
 
+import java.util.List;
+
 /**
  * @program: Newenergyvehicle
  * @description: 内容Mapper
@@ -12,4 +14,5 @@ import com.siit.zsw.pojo.Content;
 
 public interface ContentMapper {
     public void saveContent(Content content);
+    public List<Content> getContentByfid(String userid);
 }

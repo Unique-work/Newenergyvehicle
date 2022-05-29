@@ -114,6 +114,43 @@
                         <button type="button" data-toggle="modal" data-target="#carContent">发布信息</button>
                     </button>
                 </div>
+                <div id="show" class="list-group">
+                    <c:forEach items="${contents}" var="var" varStatus="vs">
+                        <div id="divs${vs.count}" class="list-group-item" style="background-color:#145885;color:#F0F8FD;border:0;border-top:1px solid #fff;">
+                            <input id="ids${vs.count}" value="${var.id}" type="hidden" />
+                            <div style="margin-left:40px;">
+                                <img src="${var.user.hpic }" class="img-circle" id="pic" border="0" height="40" width="40"/>
+                                <span style="padding-left: 20px">${var.user.username}</span>
+                                <span style="margin-left:20px;">
+<fmt:formatDate value="${var.releasetime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+			</span>
+                            </div>
+                            <div style="margin-left:115px;margin-top:10px;"> ${var.txt}</div>
+                            <div style="margin-left:115px;margin-top:10px;">
+                                <table>
+                                    <tbody id="co${vs.count}">
+                                    <c:forEach items="${comments}" var="car" varStatus="cs">
+                                        <c:if test="${car.contentid==var.id}">
+                                            <tr>
+                                                <td>
+ 						   	<span style="float:left;width:60px;margin-top:10px;">
+<img src="${car.user.hpic }" class="img-circle"
+     border="0" height="40" width="40" id="pic" /></span>
+                                                    <span style="display:inline-block;width:800px;border:0px solid;padding:10px;margin-left:10px;margin-top:15px;background-color:#196BA2;color:#F0F8FD;">${car.text}</span>
+                                                </td>
+                                            </tr>
+                                        </c:if>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="margin-top:20px;margin-left:680px;">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>点赞： <span>${var.praise}</span>
+                                <span class="glyphicon glyphicon-comment"></span>评论： <span>${var.comments}</span>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
 
             </div>
         </div>
@@ -163,6 +200,44 @@
                 </button>
             </div>
         </div>
+        <div id="show" class="list-group">
+            <c:forEach items="${contents}" var="var" varStatus="vs">
+                <div id="divs${vs.count}" class="list-group-item" style="background-color:#145885;color:#F0F8FD;border:0;border-top:1px solid #fff;">
+                    <input id="ids${vs.count}" value="${var.id}" type="hidden" />
+                    <div style="margin-left:40px;">
+                        <img src="${var.user.hpic }" class="img-circle" id="pic3" border="0" height="40" width="40"/>
+                        <span style="padding-left: 20px">${var.user.username}</span>
+                        <span style="margin-left:20px;">
+<fmt:formatDate value="${var.releasetime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+			</span>
+                    </div>
+                    <div style="margin-left:115px;margin-top:10px;"> ${var.txt}</div>
+                    <div style="margin-left:115px;margin-top:10px;">
+                        <table>
+                            <tbody id="co${vs.count}">
+                            <c:forEach items="${comments}" var="car" varStatus="cs">
+                                <c:if test="${car.contentid==var.id}">
+                                    <tr>
+                                        <td>
+ 						   	<span style="float:left;width:60px;margin-top:10px;">
+<img src="${car.user.hpic }" class="img-circle"
+     border="0" height="40" width="40" id="pic2" /></span>
+                                            <span style="display:inline-block;width:800px;border:0px solid;padding:10px;margin-left:10px;margin-top:15px;background-color:#196BA2;color:#F0F8FD;">${car.text}</span>
+                                        </td>
+                                    </tr>
+                                </c:if>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top:20px;margin-left:680px;">
+                        <span class="glyphicon glyphicon-thumbs-up"></span>点赞： <span>${var.praise}</span>
+                        <span class="glyphicon glyphicon-comment"></span>评论： <span>${var.comments}</span>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+
     </div>
 </div>
 
