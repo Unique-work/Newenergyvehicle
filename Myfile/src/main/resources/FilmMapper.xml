@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zsw.DHY.mapper.FilmMapper">
+    <insert id="insert">
+        insert tbfilm(filmname,filmpic, filmdirect) value (#{filmname},#{filmpic},#{filmdirect})
+</insert>
+    <delete id="deletet" parameterType="string">
+
+       DELETE FROM tbfilm WHERE id=#{id}
+    </delete>
+
+
+    <select id="select" resultType="com.zsw.DHY.pojo.Tbfilm">
+select  *from tbfilm
+    </select>
+    <select id="selectByName" resultType="com.zsw.DHY.pojo.Tbfilm">
+select  *from tbfilm where filmpic=#{ name}
+    </select>
+</mapper>

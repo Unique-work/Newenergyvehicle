@@ -283,7 +283,8 @@ public class IndexController {
         }
     }
 
-    @RequestMapping(value = "/myring.do", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/myring", method = RequestMethod.GET)
     public ModelAndView myring(HttpServletRequest request,
                                HttpServletResponse response, ModelMap model) {
         User us = (User)request.getSession().getAttribute("user");
@@ -298,7 +299,7 @@ public class IndexController {
         }
 
         //获取所有评论列表
-        List<carfriend >carfriends = carFriendService.getFriendByUserId(userid);
+        List<carfriend> carfriends = carFriendService.getFriendByUserId(userid);
         for (carfriend f : carfriends) {
             String p = f.getUser().getHpic();
             if(p==null||p.equals("")){
@@ -319,8 +320,7 @@ public class IndexController {
         mv.addObject("comments", comments);
         mv.addObject("carfriends", carfriends);
         mv.addObject("count",count);
-
         return mv;
-    }
 
+    }
 }
