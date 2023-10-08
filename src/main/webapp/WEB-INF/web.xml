@@ -23,7 +23,24 @@
     <servlet-name>login.jsp</servlet-name>
     <url-pattern>/login.jsp/</url-pattern>
   </servlet-mapping>-->
-
+<!--  激活tomcat内置的静态资源处理器-->
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.jpg</url-pattern>
+    <url-pattern>*.png</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.js</url-pattern>
+    <url-pattern>*.json</url-pattern>
+    <url-pattern>*.woff2</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.css</url-pattern>
+    <url-pattern>*.woff</url-pattern>
+    <url-pattern>*.ttf</url-pattern>
+  </servlet-mapping>
 
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -46,7 +63,7 @@
 
   <servlet-mapping>
     <servlet-name>app</servlet-name>
-<!--    <url-pattern>*.do</url-pattern>-->
+    <url-pattern>*.do</url-pattern>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   <!--配置解决中文乱码问题的过滤器-->

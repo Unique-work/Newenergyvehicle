@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--配置springmvc相关的信息 如controller 注解驱动 静态资源-->
+    <!-- 因为要使用注解 所有要开起-->
+    <mvc:annotation-driven/>
+    <!-- 扫描包 会使类的上面的注解生效-->
+    <context:component-scan base-package="com.zsw.DHY.service"/>
+    <context:component-scan base-package="com.zsw.DHY.controller"/>
+
+    <!-- 定义视图解析器(此处针对Jsp) -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 所有URI的前缀. -->
+        <property name="prefix" value="/WEB-INF/page/"/>
+        <!-- 所有URI的后缀. -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 配置视图  BeanNameViewResolver 解析器: 使用视图的名字来解析视图 -->
+    <!-- 通过 order 属性来定义视图解析器的优先级, order 值越小优先级越高 -->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+        <property name="order" value="100"></property>
+    </bean>
+
+
+    <!--    扫描包 会使类的上面的注解生效-->
+    <context:component-scan base-package="com.zsw.DHY.controller"/>
+    <context:component-scan base-package="com.zsw.DHY.service.impl"/>
+</beans>

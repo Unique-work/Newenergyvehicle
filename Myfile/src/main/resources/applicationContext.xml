@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--    配置数据连接池 maybatis映射工厂 连接数据库 动态代理dao接口-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!--    数据连接池配置==jdbc的第一步连接数据库-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="driverClass" value="${jdbc.driver}"/>
+
+    </bean>
+    <!-- 3.配置SqlSessionFactory对象 -->
+    <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--        注入连接池 配置mybats 就是原来的连接信息-->
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <!--        <property name="plugins">-->
+        <!--            <array>-->
+        <!--                <bean class="com.github.pagehelper.PageInterceptor"></bean>-->
+        <!--                    &lt;!&ndash; 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 &ndash;&gt;-->
+
+        <!--            </array>-->
+        <!--        </property>-->
+    </bean>
+    <!--动态注入实现到接口到spring容器中，由容器管理，创建 这样我们就不用使用Mapper方法-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--        注入数据源 整合-->
+        <property name="sqlSessionFactoryBeanName" value="factory"/>
+        <!--        扫描dao包实现注入 dao 就是maybatis映射生文件绑定的文件   /
+                    加载mybatis核心文件
+        -->
+        <property name="basePackage" value="com.zsw.DHY.mapper"/>
+    </bean>
+
+    <!-- 上传文件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <!-- 最大内存大小 -->
+        <property name="maxInMemorySize" value="10240"/>
+        <!-- 最大文件大小，-1为不限制大小 -->
+        <property name="maxUploadSize" value="-1"/>
+    </bean>
+</beans>

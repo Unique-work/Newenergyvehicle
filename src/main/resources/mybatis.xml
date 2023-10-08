@@ -19,6 +19,10 @@
         <mapper resource="com/siit/mapper/FaultSolutionMapper.xml"/>
         <mapper resource="com/siit/mapper/Distribution.xml"/>
         <mapper resource="com/siit/mapper/FaultMapper.xml"/>
+        <mapper resource="com/siit/mapper/carfriendMapper.xml"/>
+        <mapper resource="com/siit/mapper/ContentMapper.xml"/>
+        <mapper resource="com/siit/mapper/ CommentMapper.xml"/>
+        <mapper resource="com/siit/mapper/ContentPraiseMapper.xml"/>
     </mappers>
 
 

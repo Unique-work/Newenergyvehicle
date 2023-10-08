@@ -5,10 +5,7 @@ import com.siit.zsw.pojo.*;
 import com.siit.zsw.service.CarLocationService;
 import com.siit.zsw.service.ChartService;
 import com.siit.zsw.service.FaultInfoService;
-import com.siit.zsw.service.impl.CarLocationServiceImpl;
-import com.siit.zsw.service.impl.CarServiceImpl;
-import com.siit.zsw.service.impl.FaultSoltionServiceImpl;
-import com.siit.zsw.service.impl.UserServiceImpl;
+import com.siit.zsw.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,6 +30,7 @@ import java.util.Map;
 
 @Controller
 public class IndexController {
+
     @Autowired
     private UserServiceImpl userService;
 
@@ -48,6 +46,13 @@ public class IndexController {
 
     @Autowired
     private ChartService chartService;
+
+    @Autowired
+    private CarFriendServiceImpl carFriendService;
+    @Autowired
+    private ContentServiceImpl contentService;
+    @Autowired
+    private CommentServiceImpl commentServic;
     @RequestMapping("index.do")
     public String indexto(){
         System.out.println("index");
@@ -276,5 +281,46 @@ public class IndexController {
         }else{
             resp.getWriter().write(result);
         }
+    }
+
+
+    @RequestMapping(value = "/myring", method = RequestMethod.GET)
+    public ModelAndView myring(HttpServletRequest request,
+                               HttpServletResponse response, ModelMap model) {
+        User us = (User)request.getSession().getAttribute("user");
+        String userid = us.getId();
+        //获取所有帖子列表
+        List<Content> contents = contentService.getContentByfid(userid);
+        for (Content o : contents) {
+            String p = o.getUser().getHpic();
+            if(p==null||p.equals("")){
+                o.getUser().setHpic("\\car\\resources\\login\\nlogin.jpg");
+            }
+        }
+
+        //获取所有评论列表
+        List<carfriend> carfriends = carFriendService.getFriendByUserId(userid);
+        for (carfriend f : carfriends) {
+            String p = f.getUser().getHpic();
+            if(p==null||p.equals("")){
+                f.getUser().setHpic("\\car\\resources\\login\\nlogin.jpg");
+            }
+        }
+        int count = carFriendService.getCount(userid);
+        List<Comment> comments = commentServic.getComment();
+
+        for (Comment s : comments) {
+            String p = s.getUser().getHpic();
+            if(p==null||p.equals("")){
+                s.getUser().setHpic("\\car\\resources\\login\\nlogin.jpg");
+            }
+        }
+        ModelAndView mv =
+                new ModelAndView("Myring","contents",contents);
+        mv.addObject("comments", comments);
+        mv.addObject("carfriends", carfriends);
+        mv.addObject("count",count);
+        return mv;
+
     }
 }

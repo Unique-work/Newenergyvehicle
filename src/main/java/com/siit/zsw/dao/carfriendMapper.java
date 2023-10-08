@@ -5,7 +5,11 @@ import com.siit.zsw.pojo.carfriendExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
+/**
+ * @author 张世文
+ */
 public interface carfriendMapper {
     long countByExample(carfriendExample example);
 
@@ -28,4 +32,11 @@ public interface carfriendMapper {
     int updateByPrimaryKeySelective(carfriend record);
 
     int updateByPrimaryKey(carfriend record);
+    public carfriend getListByTId(Map<String,String> map);
+
+    public void saveCarFriend(carfriend carfriend);
+    public List<carfriend> getFriendByUserId(String userid);
+    public int getCount(String userid);
 }
+
+

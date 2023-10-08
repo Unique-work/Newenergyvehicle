@@ -28,4 +28,8 @@ public class pageTo {
     public String Carposition_To(){
         return "Carposition";
     }
+    @RequestMapping("map.do")
+    public String map_To(){
+        return "Map";
+    }
 }

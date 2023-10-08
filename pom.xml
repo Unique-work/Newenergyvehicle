@@ -5,10 +5,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <packaging>war</packaging>
+  <packaging>pom</packaging>
 
   <name>Newenergyvehicle</name>
-  <groupId>org.example</groupId>
+    <modules>
+        <module>Myfile</module>
+    </modules>
+    <groupId>org.example</groupId>
   <artifactId>Newenergyvehicle</artifactId>
   <version>1.0-SNAPSHOT</version>
 
